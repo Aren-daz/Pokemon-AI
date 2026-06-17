@@ -1,0 +1,23 @@
+# Large datasets
+*.pt
+*.pth
+temp.pt
+selfplay_dataset.pt
+test_dataset.pt
+
+# Large PDF documents (exceeding GitHub's 100MB limit)
+*.pdf
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS/IDE files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
