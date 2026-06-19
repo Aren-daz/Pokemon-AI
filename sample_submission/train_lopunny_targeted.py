@@ -9,8 +9,41 @@ import random
 from collections import Counter
 from model import ValueNetwork
 
+def get_state_weight(item, factor=10.0) -> float:
+    """Calculates training loss weight for a state.
+    
+    Weights only states where player's active or opponent's active Mega Lopunny ex (ID 849)
+    has HP <= 230.
+    """
+    tokens_cid = item["tokens_card_id"]
+    tokens_role = item["tokens_role"]
+    tokens_feat = item["tokens_features"]
+    
+    me_active_idx = -1
+    opp_active_idx = -1
+    for idx, r in enumerate(tokens_role):
+        role_val = int(r.item() if isinstance(r, torch.Tensor) else r)
+        if role_val == 1:
+            me_active_idx = idx
+        elif role_val == 2:
+            opp_active_idx = idx
+            
+    is_threatened = False
+    for idx in [me_active_idx, opp_active_idx]:
+        if idx != -1:
+            cid = int(tokens_cid[idx].item() if isinstance(tokens_cid[idx], torch.Tensor) else tokens_cid[idx])
+            if cid == 849:
+                hp_ratio = tokens_feat[idx][0].item() if isinstance(tokens_feat[idx][0], torch.Tensor) else tokens_feat[idx][0]
+                max_hp = tokens_feat[idx][1].item() if isinstance(tokens_feat[idx][1], torch.Tensor) else tokens_feat[idx][1]
+                current_hp = hp_ratio * max_hp * 350.0
+                if current_hp <= 230.0:
+                    is_threatened = True
+                    break
+                    
+    return factor if is_threatened else 1.0
+
 def collate_fn(batch):
-    """Dynamically pads sequences in the batch to the maximum length of this batch."""
+    """Dynamically pads sequences in the batch and computes loss weights (targeted)."""
     max_L = max(item["tokens_card_id"].shape[0] for item in batch)
     
     global_features_list = []
@@ -19,6 +52,7 @@ def collate_fn(batch):
     tokens_features_list = []
     attention_mask_list = []
     z_list = []
+    weights_list = []
     
     for item in batch:
         L = item["tokens_card_id"].shape[0]
@@ -26,6 +60,8 @@ def collate_fn(batch):
         
         global_features_list.append(item["global_features"])
         z_list.append(item["Z"])
+        # Use 10.0 as the factor
+        weights_list.append(get_state_weight(item, factor=10.0))
         
         if padding_needed > 0:
             tokens_card_id_list.append(torch.cat([item["tokens_card_id"], torch.zeros(padding_needed, dtype=torch.long)]))
@@ -44,23 +80,22 @@ def collate_fn(batch):
         "tokens_role": torch.stack(tokens_role_list),
         "tokens_features": torch.stack(tokens_features_list),
         "attention_mask": torch.stack(attention_mask_list),
-        "Z": torch.stack(z_list).squeeze(-1) # Shape: (B,)
+        "Z": torch.stack(z_list).squeeze(-1),
+        "weight": torch.tensor(weights_list, dtype=torch.float32)
     }
 
 def get_game_phase(global_features) -> str:
-    """Classifies game phase based on total remaining prizes in the global features vector."""
-    # Index 8 is len(me.prize)/6.0, Index 11 is len(opp.prize)/6.0
     me_prize = round(global_features[8].item() * 6.0)
     opp_prize = round(global_features[11].item() * 6.0)
     total_prizes = me_prize + opp_prize
     turn = round(global_features[0].item() * 50.0)
     
     if turn == 0 or total_prizes >= 11:
-        return "debut" # Turn 0 setup or at most 1 prize card taken overall
+        return "debut"
     elif total_prizes >= 5:
-        return "milieu" # Mid game
+        return "milieu"
     else:
-        return "fin" # Final sprint, close to victory
+        return "fin"
 
 def evaluate_metrics(model, dataloader, device):
     model.eval()
@@ -70,11 +105,9 @@ def evaluate_metrics(model, dataloader, device):
     correct = 0
     total = 0
     
-    # Trackers for phase metrics
     phase_counts = {"debut": 0, "milieu": 0, "fin": 0}
     phase_correct = {"debut": 0, "milieu": 0, "fin": 0}
     
-    # Majority class baseline tracker
     z_all = []
     
     with torch.no_grad():
@@ -90,12 +123,10 @@ def evaluate_metrics(model, dataloader, device):
             loss = criterion(predictions, z)
             total_loss += loss.item() * gf.size(0)
             
-            # Vectorized sign accuracy
             is_correct_batch = (predictions >= 0.0) == (z >= 0.0)
             correct += is_correct_batch.sum().item()
             total += gf.size(0)
             
-            # Vectorized game phase classification
             turn_batch = torch.round(gf[:, 0] * 50.0)
             me_prize_batch = torch.round(gf[:, 8] * 6.0)
             opp_prize_batch = torch.round(gf[:, 11] * 6.0)
@@ -119,7 +150,6 @@ def evaluate_metrics(model, dataloader, device):
     avg_loss = total_loss / total if total > 0 else 0
     accuracy = (correct / total) * 100.0 if total > 0 else 0.0
     
-    # Baselines calculation
     z_counter = Counter(z_all)
     majority_class = max(z_counter.keys(), key=lambda k: z_counter[k]) if z_counter else 1.0
     majority_count = z_counter[majority_class] if z_counter else 0
@@ -139,30 +169,27 @@ def evaluate_metrics(model, dataloader, device):
     }
 
 def train_value_network():
-    # Set seeds for reproducibility
     torch.manual_seed(42)
     np.random.seed(42)
     random.seed(42)
     
-    # Optimize CPU threads: set to 8 to avoid thread oversubscription
     torch.set_num_threads(8)
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Utilisation de l'appareil d'entraînement: {device}")
     
-    # Load dataset
-    dataset_path = "selfplay_dataset.pt"
+    dataset_path = "selfplay_dataset_lopunny.pt"
     if not os.path.exists(dataset_path):
-        print(f"Dataset non trouvé à l'emplacement: {dataset_path}")
-        sys.exit(1)
+        if os.path.exists(os.path.join("sample_submission", dataset_path)):
+            dataset_path = os.path.join("sample_submission", dataset_path)
+        else:
+            print(f"Dataset non trouvé: {dataset_path}")
+            sys.exit(1)
         
-    print("Chargement du dataset en mémoire...")
+    print(f"Chargement du dataset {dataset_path} en mémoire...")
     dataset = torch.load(dataset_path)
     
-    # ----------------------------------------------------
-    # Correction 1 : Pré-conversion du dataset en tenseurs du bon dtype
-    # ----------------------------------------------------
-    print("Pré-conversion du dataset en tenseurs du bon dtype...")
+    print("Pré-conversion du dataset en tenseurs...")
     game_id_list = []
     for item in dataset:
         item["tokens_card_id"] = torch.as_tensor(item["tokens_card_id"], dtype=torch.long)
@@ -173,21 +200,10 @@ def train_value_network():
         item["Z"] = torch.as_tensor(item["Z"], dtype=torch.float32)
         item["game_id"] = torch.as_tensor(item["game_id"], dtype=torch.long)
         
-        # Save a raw python int for fast list split lookup
         gid_val = int(item["game_id"].item())
         item["game_id_int"] = gid_val
         game_id_list.append(gid_val)
         
-    # Vérification des dtypes sur un échantillon
-    print("Vérification des dtypes après conversion (échantillon 0) :")
-    for k, v in dataset[0].items():
-        if isinstance(v, torch.Tensor):
-            print(f"  - {k} : dtype={v.dtype}, shape={list(v.shape)}")
-            
-    # ----------------------------------------------------
-    # PIÈGE CRITIQUE 1 : Split par partie (game_id), jamais par état
-    # Fast split using the pre-extracted game_id_int
-    # ----------------------------------------------------
     print("Séparation du dataset en Train/Val (80/20)...")
     game_ids = list(set(game_id_list))
     random.shuffle(game_ids)
@@ -199,13 +215,14 @@ def train_value_network():
     train_data = [item for item in dataset if item["game_id_int"] in train_game_ids]
     val_data = [item for item in dataset if item["game_id_int"] in val_game_ids]
     
-    print(f"Dataset chargé : {len(dataset)} états au total (issus de {len(game_ids)} parties)")
+    print(f"Dataset chargé : {len(dataset)} états (issus de {len(game_ids)} parties)")
     print(f"  - Entraînement : {len(train_data)} états (de {len(train_game_ids)} parties)")
     print(f"  - Validation    : {len(val_data)} états (de {len(val_game_ids)} parties)")
     
-    # ----------------------------------------------------
-    # Correction 2 & Bonus : DataLoader avec Workers et Batch=512
-    # ----------------------------------------------------
+    # Print fraction of weighted states in training dataset
+    weighted_states_count = sum(1 for item in train_data if get_state_weight(item, 10.0) > 1.0)
+    print(f"  - États pondérés (exposés <= 230 HP) dans l'entraînement : {weighted_states_count} ({weighted_states_count/len(train_data)*100.0:.2f}%)")
+    
     batch_size = 512
     train_loader = DataLoader(
         train_data, 
@@ -227,15 +244,22 @@ def train_value_network():
     # Model
     model = ValueNetwork().to(device)
     optimizer = optim.Adam(model.parameters(), lr=1.4e-3, weight_decay=1e-4)
-    criterion = nn.MSELoss()
+    criterion = nn.MSELoss(reduction='none')
     
     epochs = 30
-    print("\nLancement de l'entraînement...")
+    print("\nLancement de l'entraînement avec Perte Ciblée (Facteur 10.0x)...")
     
     train_losses = []
     val_losses = []
     best_val_loss = float('inf')
     best_epoch = 0
+    
+    out_dir = "sample_submission"
+    if not os.path.exists(out_dir):
+        out_dir = "."
+        
+    best_model_path = os.path.join(out_dir, "value_network_lopunny_targeted_best.pth")
+    final_model_path = os.path.join(out_dir, "value_network_lopunny_targeted.pth")
     
     for epoch in range(1, epochs + 1):
         model.train()
@@ -249,18 +273,22 @@ def train_value_network():
             t_feat = batch["tokens_features"].to(device)
             mask = batch["attention_mask"].to(device)
             z = batch["Z"].to(device)
+            w = batch["weight"].to(device)
             
             optimizer.zero_grad()
             predictions = model(gf, t_cid, t_role, t_feat, mask)
+            
             loss = criterion(predictions, z)
-            loss.backward()
+            weighted_loss = (loss * w).mean()
+            
+            weighted_loss.backward()
             optimizer.step()
             
-            epoch_loss += loss.item() * gf.size(0)
+            epoch_loss += loss.mean().item() * gf.size(0)
             total_samples += gf.size(0)
             
             if batch_idx % 100 == 0 or batch_idx == len(train_loader):
-                print(f"  [Époque {epoch}] Batch {batch_idx}/{len(train_loader)} | Loss: {loss.item():.4f}", end="\r", flush=True)
+                print(f"  [Époque {epoch}] Batch {batch_idx}/{len(train_loader)} | Loss: {loss.mean().item():.4f}", end="\r", flush=True)
                 
         print()
         train_loss = epoch_loss / total_samples
@@ -271,56 +299,24 @@ def train_value_network():
         val_loss = val_metrics["loss"]
         val_losses.append(val_loss)
         
-        # Early stopping checkpoint saving
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             best_epoch = epoch
-            torch.save(model.state_dict(), "value_network_best.pth")
+            torch.save(model.state_dict(), best_model_path)
             
         print(f"Époque {epoch:02d}/{epochs} | Loss Train: {train_loss:.4f} | Loss Val: {val_loss:.4f} | Val Accuracy: {val_metrics['accuracy']:.1f}%")
         
-        # Check early stopping patience
         if epoch - best_epoch >= 3:
-            print(f"\n[Early Stopping] Arrêt précoce déclenché après {epoch} époques sans amélioration de la loss de validation.")
+            print(f"\n[Early Stopping] Arrêt précoce après {epoch} époques.")
             break
             
-    # Load the best checkpoint for final evaluation
-    print(f"\nChargement du meilleur checkpoint (Époque {best_epoch:02d} avec Loss Val: {best_val_loss:.4f}) pour les métriques...")
-    model.load_state_dict(torch.load("value_network_best.pth"))
+    print(f"\nChargement du meilleur checkpoint (Époque {best_epoch:02d} avec Loss Val: {best_val_loss:.4f})...")
+    model.load_state_dict(torch.load(best_model_path))
     
-    # Final evaluation
-    final_val_metrics = evaluate_metrics(model, val_loader, device)
+    torch.save(model.state_dict(), final_model_path)
+    print(f"Modèle final sauvegardé sous {final_model_path}")
     
-    print("\n" + "="*60)
-    print(" RÉSULTATS DE L'ENTRAÎNEMENT DU RÉSEAU DE VALEUR ")
-    print("="*60)
-    print(f" Final Loss Train : {train_losses[-1]:.4f}")
-    print(f" Final Loss Val   : {val_losses[-1]:.4f}")
-    print(f" Accuracy de signe globale (Validation) : {final_val_metrics['accuracy']:.2f}%")
-    print(f" Comparaison aux baselines :")
-    print(f"   - Baseline Aléatoire          : 50.00%")
-    print(f"   - Baseline Classe Majoritaire : {final_val_metrics['majority_accuracy']:.2f}%")
-    
-    # Check if we beat the majority class baseline
-    if final_val_metrics['accuracy'] > final_val_metrics['majority_accuracy']:
-        print(f"   >>> SUCCÈS : Le modèle bat la classe majoritaire de {final_val_metrics['accuracy'] - final_val_metrics['majority_accuracy']:.2f}% !")
-    else:
-        print(f"   >>> ATTENTION : Le modèle ne parvient pas encore à battre la classe majoritaire (Overfitting / manque de données).")
-        
-    print(f"\n Accuracy par phase de jeu (Décomposition) :")
-    for phase, acc in final_val_metrics['phase_accuracies'].items():
-        cnt = final_val_metrics['phase_counts'][phase]
-        print(f"   - Phase {phase:<7} : {acc:6.2f}% ({cnt:3d} états évalués)")
-        
-    # Check for overfitting
-    print("\n Analyse de l'entraînement :")
-    if val_losses[-1] > min(val_losses) * 1.15:
-        print(f"   >>> ALERTE : Risque d'overfitting détecté. La loss Val minimale était de {min(val_losses):.4f} et a remonté à {val_losses[-1]:.4f}.")
-    else:
-        print("   >>> STABILITÉ : La loss Val est stable et n'a pas remonté de manière significative.")
-    print("="*60)
-
-    # Save training curves as a plot
+    # Save training curves
     try:
         import matplotlib.pyplot as plt
         import shutil
@@ -329,26 +325,27 @@ def train_value_network():
         plt.plot(range(1, len(val_losses) + 1), val_losses, label='Val Loss', marker='s')
         plt.xlabel('Epoch')
         plt.ylabel('Loss (MSE)')
-        plt.title('Training and Validation Loss Curves')
+        plt.title('Lopunny Targeted Training Loss Curves')
         plt.legend()
         plt.grid(True)
-        plt.savefig('loss_curves.png', dpi=150)
-        print("Courbe de loss sauvegardée sous loss_curves.png")
+        plot_name = "loss_curves_lopunny_targeted.png"
+        plt.savefig(plot_name, dpi=150)
         
-        # Copy to artifacts directory if it exists
         art_dir = r"C:\Users\adamt\.gemini\antigravity\brain\8a040cdd-6fc2-4393-9208-7c74c8421b6a"
         if os.path.exists(art_dir):
-            shutil.copy("loss_curves.png", os.path.join(art_dir, "loss_curves.png"))
-            print(f"Courbe de loss copiée dans le dossier d'artifacts: {art_dir}")
+            shutil.copy(plot_name, os.path.join(art_dir, plot_name))
     except Exception as e:
-        print(f"Erreur lors de la génération du graphique: {e}")
-
-    # Save metrics as JSON for automatic parsing
+        print(f"Erreur graphique: {e}")
+        
+    # Save JSON metrics
     try:
         import json
+        final_val_metrics = evaluate_metrics(model, val_loader, device)
         metrics_to_save = {
             "train_losses": train_losses,
             "val_losses": val_losses,
+            "best_epoch": best_epoch,
+            "best_val_loss": best_val_loss,
             "final_val_metrics": {
                 "accuracy": final_val_metrics["accuracy"],
                 "majority_accuracy": final_val_metrics["majority_accuracy"],
@@ -356,15 +353,11 @@ def train_value_network():
                 "phase_counts": final_val_metrics["phase_counts"]
             }
         }
-        with open("training_metrics.json", "w") as f:
+        metrics_path = os.path.join(out_dir, "training_metrics_lopunny_targeted.json")
+        with open(metrics_path, "w") as f:
             json.dump(metrics_to_save, f, indent=4)
-        print("Métriques d'entraînement sauvegardées sous training_metrics.json")
     except Exception as e:
-        print(f"Erreur lors de la sauvegarde des métriques JSON: {e}")
-
-    # Save model weights
-    torch.save(model.state_dict(), "value_network.pth")
-    print("Modèle sauvegardé sous le nom value_network.pth")
+        print(f"Erreur JSON: {e}")
 
 if __name__ == "__main__":
     train_value_network()

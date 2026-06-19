@@ -1,0 +1,1267 @@
+ID: 419 | Name: Abomasnow | CardType: 0 | HP: 150
+ID: 109 | Name: Abra | CardType: 0 | HP: 40
+ID: 741 | Name: Abra | CardType: 0 | HP: 50
+ID: 776 | Name: Absol | CardType: 0 | HP: 110
+ID: 1248 | Name: Academy at Night | CardType: 4 | HP: 0
+ID: 565 | Name: Accelgor | CardType: 0 | HP: 100
+ID: 1091 | Name: Accompanying Flute | CardType: 1 | HP: 0
+ID: 1228 | Name: Acerola's Mischief | CardType: 3 | HP: 0
+ID: 1067 | Name: Aegislash | CardType: 0 | HP: 150
+ID: 843 | Name: Aipom | CardType: 0 | HP: 70
+ID: 1174 | Name: Air Balloon | CardType: 2 | HP: 0
+ID: 245 | Name: Alakazam | CardType: 0 | HP: 140
+ID: 743 | Name: Alakazam | CardType: 0 | HP: 140
+ID: 769 | Name: Alcremie | CardType: 0 | HP: 90
+ID: 193 | Name: Alolan Exeggutor ex | CardType: 0 | HP: 300
+ID: 505 | Name: Alomomola | CardType: 0 | HP: 110
+ID: 194 | Name: Altaria | CardType: 0 | HP: 120
+ID: 1207 | Name: Amarys | CardType: 3 | HP: 0
+ID: 1032 | Name: Amaura | CardType: 0 | HP: 100
+ID: 844 | Name: Ambipom | CardType: 0 | HP: 110
+ID: 489 | Name: Amoonguss | CardType: 0 | HP: 120
+ID: 1169 | Name: Amulet of Hope | CardType: 2 | HP: 0
+ID: 224 | Name: Annihilape | CardType: 0 | HP: 140
+ID: 439 | Name: Annihilape | CardType: 0 | HP: 150
+ID: 1234 | Name: Anthea & Concordia | CardType: 3 | HP: 0
+ID: 1136 | Name: Antique Cover Fossil | CardType: 1 | HP: 60
+ID: 1150 | Name: Antique Jaw Fossil | CardType: 1 | HP: 60
+ID: 1138 | Name: Antique Plume Fossil | CardType: 1 | HP: 60
+ID: 1099 | Name: Antique Root Fossil | CardType: 1 | HP: 60
+ID: 1151 | Name: Antique Sail Fossil | CardType: 1 | HP: 60
+ID: 42 | Name: Applin | CardType: 0 | HP: 40
+ID: 92 | Name: Applin | CardType: 0 | HP: 40
+ID: 149 | Name: Applin | CardType: 0 | HP: 40
+ID: 346 | Name: Applin | CardType: 0 | HP: 40
+ID: 404 | Name: Arboliva ex | CardType: 0 | HP: 310
+ID: 406 | Name: Arcanine | CardType: 0 | HP: 140
+ID: 170 | Name: Archaludon | CardType: 0 | HP: 180
+ID: 840 | Name: Archaludon | CardType: 0 | HP: 180
+ID: 190 | Name: Archaludon ex | CardType: 0 | HP: 300
+ID: 603 | Name: Archen | CardType: 0 | HP: 80
+ID: 604 | Name: Archeops | CardType: 0 | HP: 140
+ID: 1250 | Name: Area Zero Underdepths | CardType: 4 | HP: 0
+ID: 1012 | Name: Ariados | CardType: 0 | HP: 110
+ID: 1045 | Name: Aromatisse | CardType: 0 | HP: 120
+ID: 421 | Name: Arrokuda | CardType: 0 | HP: 70
+ID: 392 | Name: Arven's Greedent | CardType: 0 | HP: 120
+ID: 389 | Name: Arven's Mabosstiff ex | CardType: 0 | HP: 270
+ID: 388 | Name: Arven's Maschiff | CardType: 0 | HP: 70
+ID: 1130 | Name: Arven's Sandwich | CardType: 1 | HP: 0
+ID: 391 | Name: Arven's Skwovet | CardType: 0 | HP: 60
+ID: 384 | Name: Arven's Toedscool | CardType: 0 | HP: 70
+ID: 385 | Name: Arven's Toedscruel | CardType: 0 | HP: 140
+ID: 554 | Name: Audino | CardType: 0 | HP: 100
+ID: 1033 | Name: Aurorus | CardType: 0 | HP: 170
+ID: 1085 | Name: Awakening Drum | CardType: 1 | HP: 0
+ID: 548 | Name: Axew | CardType: 0 | HP: 70
+ID: 217 | Name: Azelf | CardType: 0 | HP: 70
+ID: 315 | Name: Azumarill | CardType: 0 | HP: 120
+ID: 962 | Name: Azumarill ex | CardType: 0 | HP: 270
+ID: 300 | Name: Bagon | CardType: 0 | HP: 70
+ID: 273 | Name: Banette | CardType: 0 | HP: 90
+ID: 1052 | Name: Barbaracle | CardType: 0 | HP: 130
+ID: 422 | Name: Barraskewda | CardType: 0 | HP: 130
+ID: 577 | Name: Basculin | CardType: 0 | HP: 90
+ID: 7 | Name: Basic {D} Energy | CardType: 5 | HP: 0
+ID: 6 | Name: Basic {F} Energy | CardType: 5 | HP: 0
+ID: 1 | Name: Basic {G} Energy | CardType: 5 | HP: 0
+ID: 4 | Name: Basic {L} Energy | CardType: 5 | HP: 0
+ID: 8 | Name: Basic {M} Energy | CardType: 5 | HP: 0
+ID: 5 | Name: Basic {P} Energy | CardType: 5 | HP: 0
+ID: 2 | Name: Basic {R} Energy | CardType: 5 | HP: 0
+ID: 3 | Name: Basic {W} Energy | CardType: 5 | HP: 0
+ID: 1264 | Name: Battle Cage | CardType: 4 | HP: 0
+ID: 709 | Name: Bayleef | CardType: 0 | HP: 110
+ID: 918 | Name: Bayleef | CardType: 0 | HP: 100
+ID: 507 | Name: Beartic | CardType: 0 | HP: 150
+ID: 852 | Name: Beautifly | CardType: 0 | HP: 130
+ID: 522 | Name: Beheeyem | CardType: 0 | HP: 90
+ID: 964 | Name: Beheeyem | CardType: 0 | HP: 100
+ID: 85 | Name: Beldum | CardType: 0 | HP: 70
+ID: 274 | Name: Beldum | CardType: 0 | HP: 60
+ID: 761 | Name: Bewear | CardType: 0 | HP: 130
+ID: 1190 | Name: Bianca’s Devotion | CardType: 3 | HP: 0
+ID: 1181 | Name: Billy & O'Nare | CardType: 3 | HP: 0
+ID: 1051 | Name: Binacle | CardType: 0 | HP: 80
+ID: 1162 | Name: Binding Mochi | CardType: 2 | HP: 0
+ID: 545 | Name: Bisharp | CardType: 0 | HP: 120
+ID: 900 | Name: Bisharp | CardType: 0 | HP: 120
+ID: 1211 | Name: Black Belt’s Training | CardType: 3 | HP: 0
+ID: 179 | Name: Black Kyurem ex | CardType: 0 | HP: 230
+ID: 412 | Name: Blaziken | CardType: 0 | HP: 170
+ID: 326 | Name: Blaziken ex | CardType: 0 | HP: 320
+ID: 125 | Name: Blissey ex | CardType: 0 | HP: 300
+ID: 584 | Name: Blitzle | CardType: 0 | HP: 60
+ID: 135 | Name: Bloodmoon Ursaluna | CardType: 0 | HP: 150
+ID: 44 | Name: Bloodmoon Ursaluna ex | CardType: 0 | HP: 260
+ID: 1148 | Name: Blowtorch | CardType: 1 | HP: 0
+ID: 600 | Name: Boldore | CardType: 0 | HP: 110
+ID: 808 | Name: Boltund | CardType: 0 | HP: 130
+ID: 9 | Name: Boomerang Energy | CardType: 6 | HP: 0
+ID: 1182 | Name: Boss’s Orders | CardType: 3 | HP: 0
+ID: 175 | Name: Bouffalant | CardType: 0 | HP: 100
+ID: 233 | Name: Bouffalant | CardType: 0 | HP: 130
+ID: 631 | Name: Bouffalant ex | CardType: 0 | HP: 220
+ID: 1084 | Name: Boxed Order | CardType: 1 | HP: 0
+ID: 818 | Name: Brambleghast | CardType: 0 | HP: 100
+ID: 817 | Name: Bramblin | CardType: 0 | HP: 50
+ID: 1175 | Name: Brave Bangle | CardType: 2 | HP: 0
+ID: 633 | Name: Braviary | CardType: 0 | HP: 140
+ID: 395 | Name: Breloom | CardType: 0 | HP: 120
+ID: 1201 | Name: Briar | CardType: 3 | HP: 0
+ID: 1128 | Name: Brilliant Blender | CardType: 1 | HP: 0
+ID: 1210 | Name: Brock’s Scouting | CardType: 3 | HP: 0
+ID: 55 | Name: Bronzong | CardType: 0 | HP: 110
+ID: 837 | Name: Bronzong | CardType: 0 | HP: 140
+ID: 54 | Name: Bronzor | CardType: 0 | HP: 80
+ID: 335 | Name: Bronzor | CardType: 0 | HP: 70
+ID: 836 | Name: Bronzor | CardType: 0 | HP: 80
+ID: 989 | Name: Bronzor | CardType: 0 | HP: 60
+ID: 986 | Name: Brute Bonnet | CardType: 0 | HP: 120
+ID: 180 | Name: Bruxish | CardType: 0 | HP: 110
+ID: 1086 | Name: Buddy-Buddy Poffin | CardType: 1 | HP: 0
+ID: 235 | Name: Budew | CardType: 0 | HP: 30
+ID: 1094 | Name: Bug Catching Set | CardType: 1 | HP: 0
+ID: 367 | Name: Buizel | CardType: 0 | HP: 70
+ID: 650 | Name: Bulbasaur | CardType: 0 | HP: 80
+ID: 758 | Name: Buneary | CardType: 0 | HP: 70
+ID: 848 | Name: Buneary | CardType: 0 | HP: 70
+ID: 1073 | Name: Bunnelby | CardType: 0 | HP: 70
+ID: 254 | Name: Butterfree | CardType: 0 | HP: 120
+ID: 1101 | Name: Call Bell | CardType: 1 | HP: 0
+ID: 857 | Name: Camerupt | CardType: 0 | HP: 140
+ID: 1233 | Name: Canari | CardType: 3 | HP: 0
+ID: 925 | Name: Capsakid | CardType: 0 | HP: 70
+ID: 976 | Name: Carbink | CardType: 0 | HP: 90
+ID: 888 | Name: Carkol | CardType: 0 | HP: 110
+ID: 1192 | Name: Carmine | CardType: 3 | HP: 0
+ID: 155 | Name: Carracosta | CardType: 0 | HP: 160
+ID: 504 | Name: Carracosta | CardType: 0 | HP: 180
+ID: 827 | Name: Carvanha | CardType: 0 | HP: 70
+ID: 853 | Name: Cascoon | CardType: 0 | HP: 90
+ID: 1196 | Name: Cassiopeia | CardType: 3 | HP: 0
+ID: 252 | Name: Caterpie | CardType: 0 | HP: 50
+ID: 655 | Name: Celebi | CardType: 0 | HP: 80
+ID: 718 | Name: Centiskorch | CardType: 0 | HP: 140
+ID: 934 | Name: Centiskorch | CardType: 0 | HP: 130
+ID: 797 | Name: Ceruledge | CardType: 0 | HP: 140
+ID: 320 | Name: Ceruledge ex | CardType: 0 | HP: 270
+ID: 424 | Name: Cetitan ex | CardType: 0 | HP: 300
+ID: 423 | Name: Cetoddle | CardType: 0 | HP: 100
+ID: 98 | Name: Chandelure | CardType: 0 | HP: 130
+ID: 495 | Name: Chandelure | CardType: 0 | HP: 150
+ID: 124 | Name: Chansey | CardType: 0 | HP: 120
+ID: 204 | Name: Charcadet | CardType: 0 | HP: 80
+ID: 319 | Name: Charcadet | CardType: 0 | HP: 70
+ID: 796 | Name: Charcadet | CardType: 0 | HP: 70
+ID: 788 | Name: Charmander | CardType: 0 | HP: 80
+ID: 926 | Name: Charmander | CardType: 0 | HP: 80
+ID: 789 | Name: Charmeleon | CardType: 0 | HP: 110
+ID: 927 | Name: Charmeleon | CardType: 0 | HP: 100
+ID: 1224 | Name: Cheren | CardType: 3 | HP: 0
+ID: 157 | Name: Chewtle | CardType: 0 | HP: 80
+ID: 31 | Name: Chi-Yu | CardType: 0 | HP: 110
+ID: 719 | Name: Chi-Yu | CardType: 0 | HP: 110
+ID: 209 | Name: Chien-Pao | CardType: 0 | HP: 120
+ID: 1063 | Name: Chien-Pao | CardType: 0 | HP: 120
+ID: 708 | Name: Chikorita | CardType: 0 | HP: 70
+ID: 917 | Name: Chikorita | CardType: 0 | HP: 70
+ID: 1108 | Name: Chill Teaser Toy | CardType: 1 | HP: 0
+ID: 556 | Name: Cinccino | CardType: 0 | HP: 100
+ID: 666 | Name: Cinderace | CardType: 0 | HP: 160
+ID: 153 | Name: Cinderace ex | CardType: 0 | HP: 320
+ID: 1188 | Name: Ciphermaniac’s Codebreaking | CardType: 3 | HP: 0
+ID: 415 | Name: Clamperl | CardType: 0 | HP: 60
+ID: 724 | Name: Clauncher | CardType: 0 | HP: 80
+ID: 725 | Name: Clawitzer | CardType: 0 | HP: 130
+ID: 958 | Name: Clefable | CardType: 0 | HP: 120
+ID: 1039 | Name: Clefairy | CardType: 0 | HP: 70
+ID: 889 | Name: Coalossal | CardType: 0 | HP: 180
+ID: 546 | Name: Cobalion | CardType: 0 | HP: 120
+ID: 219 | Name: Cofagrigus | CardType: 0 | HP: 120
+ID: 593 | Name: Cofagrigus | CardType: 0 | HP: 120
+ID: 1194 | Name: Colress’s Tenacity | CardType: 3 | HP: 0
+ID: 325 | Name: Combusken | CardType: 0 | HP: 90
+ID: 411 | Name: Combusken | CardType: 0 | HP: 100
+ID: 164 | Name: Comfey | CardType: 0 | HP: 70
+ID: 1242 | Name: Community Center | CardType: 4 | HP: 0
+ID: 115 | Name: Conkeldurr | CardType: 0 | HP: 180
+ID: 530 | Name: Conkeldurr | CardType: 0 | HP: 140
+ID: 1212 | Name: Cook | CardType: 3 | HP: 0
+ID: 1180 | Name: Core Memory | CardType: 2 | HP: 0
+ID: 386 | Name: Cornerstone Mask Ogerpon | CardType: 0 | HP: 110
+ID: 117 | Name: Cornerstone Mask Ogerpon ex | CardType: 0 | HP: 210
+ID: 667 | Name: Corphish | CardType: 0 | HP: 80
+ID: 237 | Name: Cottonee | CardType: 0 | HP: 60
+ID: 560 | Name: Cottonee | CardType: 0 | HP: 60
+ID: 814 | Name: Cottonee | CardType: 0 | HP: 60
+ID: 1168 | Name: Counter Gain | CardType: 2 | HP: 0
+ID: 156 | Name: Crabominable | CardType: 0 | HP: 160
+ID: 977 | Name: Crabrawler | CardType: 0 | HP: 90
+ID: 147 | Name: Cradily | CardType: 0 | HP: 150
+ID: 946 | Name: Cramorant | CardType: 0 | HP: 110
+ID: 686 | Name: Crawdaunt | CardType: 0 | HP: 130
+ID: 764 | Name: Cresselia | CardType: 0 | HP: 120
+ID: 1198 | Name: Crispin | CardType: 3 | HP: 0
+ID: 679 | Name: Croagunk | CardType: 0 | HP: 70
+ID: 936 | Name: Crocalor | CardType: 0 | HP: 110
+ID: 48 | Name: Croconaw | CardType: 0 | HP: 90
+ID: 938 | Name: Croconaw | CardType: 0 | HP: 100
+ID: 1120 | Name: Crushing Hammer | CardType: 1 | HP: 0
+ID: 345 | Name: Crustle | CardType: 0 | HP: 150
+ID: 533 | Name: Crustle | CardType: 0 | HP: 150
+ID: 508 | Name: Cryogonal | CardType: 0 | HP: 90
+ID: 506 | Name: Cubchoo | CardType: 0 | HP: 70
+ID: 365 | Name: Cynthia's Feebas | CardType: 0 | HP: 30
+ID: 380 | Name: Cynthia's Gabite | CardType: 0 | HP: 100
+ID: 381 | Name: Cynthia's Garchomp ex | CardType: 0 | HP: 330
+ID: 379 | Name: Cynthia's Gible | CardType: 0 | HP: 70
+ID: 366 | Name: Cynthia's Milotic | CardType: 0 | HP: 130
+ID: 1173 | Name: Cynthia's Power Weight | CardType: 2 | HP: 0
+ID: 341 | Name: Cynthia's Roselia | CardType: 0 | HP: 70
+ID: 342 | Name: Cynthia's Roserade | CardType: 0 | HP: 130
+ID: 387 | Name: Cynthia's Spiritomb | CardType: 0 | HP: 70
+ID: 1205 | Name: Cyrano | CardType: 3 | HP: 0
+ID: 968 | Name: Dachsbun ex | CardType: 0 | HP: 250
+ID: 1095 | Name: Dangerous Laser | CardType: 1 | HP: 0
+ID: 492 | Name: Darmanitan | CardType: 0 | HP: 140
+ID: 793 | Name: Darmanitan | CardType: 0 | HP: 150
+ID: 128 | Name: Dartrix | CardType: 0 | HP: 90
+ID: 1021 | Name: Dartrix | CardType: 0 | HP: 100
+ID: 491 | Name: Darumaka | CardType: 0 | HP: 80
+ID: 792 | Name: Darumaka | CardType: 0 | HP: 80
+ID: 1231 | Name: Dawn | CardType: 3 | HP: 0
+ID: 129 | Name: Decidueye | CardType: 0 | HP: 150
+ID: 1022 | Name: Decidueye ex | CardType: 0 | HP: 320
+ID: 222 | Name: Dedenne | CardType: 0 | HP: 70
+ID: 1038 | Name: Dedenne | CardType: 0 | HP: 70
+ID: 1106 | Name: Deduction Kit | CardType: 1 | HP: 0
+ID: 71 | Name: Deerling | CardType: 0 | HP: 70
+ID: 562 | Name: Deerling | CardType: 0 | HP: 70
+ID: 227 | Name: Deino | CardType: 0 | HP: 70
+ID: 616 | Name: Deino | CardType: 0 | HP: 80
+ID: 1001 | Name: Delcatty | CardType: 0 | HP: 100
+ID: 757 | Name: Delibird | CardType: 0 | HP: 90
+ID: 1167 | Name: Deluxe Bomb | CardType: 2 | HP: 0
+ID: 799 | Name: Dewgong | CardType: 0 | HP: 130
+ID: 1029 | Name: Dewgong | CardType: 0 | HP: 130
+ID: 575 | Name: Dewott | CardType: 0 | HP: 100
+ID: 332 | Name: Dhelmise | CardType: 0 | HP: 130
+ID: 714 | Name: Dhelmise | CardType: 0 | HP: 120
+ID: 195 | Name: Dialga | CardType: 0 | HP: 130
+ID: 696 | Name: Dialga | CardType: 0 | HP: 140
+ID: 1074 | Name: Diggersby | CardType: 0 | HP: 150
+ID: 93 | Name: Dipplin | CardType: 0 | HP: 80
+ID: 347 | Name: Dipplin | CardType: 0 | HP: 90
+ID: 921 | Name: Dipplin | CardType: 0 | HP: 90
+ID: 1265 | Name: Dizzying Valley | CardType: 4 | HP: 0
+ID: 403 | Name: Dolliv | CardType: 0 | HP: 90
+ID: 369 | Name: Dondozo ex | CardType: 0 | HP: 260
+ID: 1066 | Name: Doublade | CardType: 0 | HP: 100
+ID: 121 | Name: Dragapult ex | CardType: 0 | HP: 320
+ID: 1105 | Name: Dragon Elixir | CardType: 1 | HP: 0
+ID: 903 | Name: Dragonair | CardType: 0 | HP: 100
+ID: 120 | Name: Drakloak | CardType: 0 | HP: 90
+ID: 1010 | Name: Drampa | CardType: 0 | HP: 130
+ID: 1061 | Name: Drapion | CardType: 0 | HP: 140
+ID: 902 | Name: Dratini | CardType: 0 | HP: 80
+ID: 1202 | Name: Drayton | CardType: 3 | HP: 0
+ID: 158 | Name: Drednaw | CardType: 0 | HP: 140
+ID: 119 | Name: Dreepy | CardType: 0 | HP: 70
+ID: 81 | Name: Drilbur | CardType: 0 | HP: 70
+ID: 526 | Name: Drilbur | CardType: 0 | HP: 70
+ID: 727 | Name: Drizzile | CardType: 0 | HP: 100
+ID: 625 | Name: Druddigon | CardType: 0 | HP: 120
+ID: 578 | Name: Ducklett | CardType: 0 | HP: 70
+ID: 66 | Name: Dudunsparce | CardType: 0 | HP: 140
+ID: 306 | Name: Dudunsparce ex | CardType: 0 | HP: 270
+ID: 65 | Name: Dunsparce | CardType: 0 | HP: 60
+ID: 305 | Name: Dunsparce | CardType: 0 | HP: 70
+ID: 519 | Name: Duosion | CardType: 0 | HP: 70
+ID: 169 | Name: Duraludon | CardType: 0 | HP: 130
+ID: 839 | Name: Duraludon | CardType: 0 | HP: 130
+ID: 992 | Name: Duraludon | CardType: 0 | HP: 130
+ID: 624 | Name: Durant | CardType: 0 | HP: 110
+ID: 198 | Name: Durant ex | CardType: 0 | HP: 190
+ID: 132 | Name: Dusclops | CardType: 0 | HP: 90
+ID: 1102 | Name: Dusk Ball | CardType: 1 | HP: 0
+ID: 133 | Name: Dusknoir | CardType: 0 | HP: 160
+ID: 131 | Name: Duskull | CardType: 0 | HP: 60
+ID: 854 | Name: Dustox | CardType: 0 | HP: 140
+ID: 344 | Name: Dwebble | CardType: 0 | HP: 70
+ID: 532 | Name: Dwebble | CardType: 0 | HP: 70
+ID: 512 | Name: Eelektrik | CardType: 0 | HP: 90
+ID: 513 | Name: Eelektross | CardType: 0 | HP: 160
+ID: 43 | Name: Eevee | CardType: 0 | HP: 50
+ID: 145 | Name: Eevee | CardType: 0 | HP: 70
+ID: 317 | Name: Eevee | CardType: 0 | HP: 50
+ID: 249 | Name: Eevee ex | CardType: 0 | HP: 200
+ID: 731 | Name: Eiscue | CardType: 0 | HP: 110
+ID: 371 | Name: Electabuzz | CardType: 0 | HP: 90
+ID: 372 | Name: Electivire ex | CardType: 0 | HP: 280
+ID: 374 | Name: Electrike | CardType: 0 | HP: 60
+ID: 736 | Name: Electrike | CardType: 0 | HP: 70
+ID: 521 | Name: Elgyem | CardType: 0 | HP: 60
+ID: 569 | Name: Emboar | CardType: 0 | HP: 180
+ID: 1214 | Name: Emcee's Hype | CardType: 3 | HP: 0
+ID: 510 | Name: Emolga | CardType: 0 | HP: 70
+ID: 835 | Name: Empoleon ex | CardType: 0 | HP: 320
+ID: 39 | Name: Enamorus | CardType: 0 | HP: 120
+ID: 1135 | Name: Energy Coin | CardType: 1 | HP: 0
+ID: 1139 | Name: Energy Recycler | CardType: 1 | HP: 0
+ID: 1118 | Name: Energy Retrieval | CardType: 1 | HP: 0
+ID: 1119 | Name: Energy Search | CardType: 1 | HP: 0
+ID: 1100 | Name: Energy Search Pro | CardType: 1 | HP: 0
+ID: 1149 | Name: Energy Swatter | CardType: 1 | HP: 0
+ID: 1116 | Name: Energy Switch | CardType: 1 | HP: 0
+ID: 1081 | Name: Enhanced Hammer | CardType: 1 | HP: 0
+ID: 13 | Name: Enriching Energy | CardType: 6 | HP: 0
+ID: 855 | Name: Entei | CardType: 0 | HP: 140
+ID: 1186 | Name: Eri | CardType: 3 | HP: 0
+ID: 912 | Name: Erika's Bellsprout | CardType: 0 | HP: 60
+ID: 910 | Name: Erika's Gloom | CardType: 0 | HP: 90
+ID: 909 | Name: Erika's Oddish | CardType: 0 | HP: 60
+ID: 915 | Name: Erika's Tangela | CardType: 0 | HP: 80
+ID: 914 | Name: Erika's Victreebel | CardType: 0 | HP: 150
+ID: 911 | Name: Erika's Vileplume ex | CardType: 0 | HP: 310
+ID: 913 | Name: Erika's Weepinbell | CardType: 0 | HP: 90
+ID: 543 | Name: Escavalier | CardType: 0 | HP: 130
+ID: 246 | Name: Espeon ex | CardType: 0 | HP: 270
+ID: 220 | Name: Espurr | CardType: 0 | HP: 60
+ID: 1042 | Name: Espurr | CardType: 0 | HP: 60
+ID: 777 | Name: Eternatus | CardType: 0 | HP: 150
+ID: 1215 | Name: Ethan's Adventure | CardType: 3 | HP: 0
+ID: 352 | Name: Ethan's Cyndaquil | CardType: 0 | HP: 70
+ID: 357 | Name: Ethan's Ho-Oh ex | CardType: 0 | HP: 230
+ID: 356 | Name: Ethan's Magcargo | CardType: 0 | HP: 130
+ID: 373 | Name: Ethan's Pichu | CardType: 0 | HP: 30
+ID: 338 | Name: Ethan's Pinsir | CardType: 0 | HP: 120
+ID: 353 | Name: Ethan's Quilava | CardType: 0 | HP: 100
+ID: 355 | Name: Ethan's Slugma | CardType: 0 | HP: 80
+ID: 378 | Name: Ethan's Sudowoodo | CardType: 0 | HP: 110
+ID: 354 | Name: Ethan's Typhlosion | CardType: 0 | HP: 170
+ID: 82 | Name: Excadrill | CardType: 0 | HP: 130
+ID: 527 | Name: Excadrill ex | CardType: 0 | HP: 270
+ID: 177 | Name: Exeggcute | CardType: 0 | HP: 30
+ID: 653 | Name: Exeggcute | CardType: 0 | HP: 60
+ID: 654 | Name: Exeggutor | CardType: 0 | HP: 140
+ID: 1185 | Name: Explorer’s Guidance | CardType: 3 | HP: 0
+ID: 174 | Name: Fan Rotom | CardType: 0 | HP: 70
+ID: 123 | Name: Farfetch'd | CardType: 0 | HP: 70
+ID: 83 | Name: Farigiraf ex | CardType: 0 | HP: 260
+ID: 702 | Name: Fearow | CardType: 0 | HP: 100
+ID: 206 | Name: Feebas | CardType: 0 | HP: 30
+ID: 242 | Name: Feebas | CardType: 0 | HP: 30
+ID: 1222 | Name: Fennel | CardType: 3 | HP: 0
+ID: 49 | Name: Feraligatr | CardType: 0 | HP: 180
+ID: 619 | Name: Ferroseed | CardType: 0 | HP: 70
+ID: 620 | Name: Ferrothorn | CardType: 0 | HP: 140
+ID: 1245 | Name: Festival Grounds | CardType: 4 | HP: 0
+ID: 970 | Name: Fezandipiti | CardType: 0 | HP: 120
+ID: 140 | Name: Fezandipiti ex | CardType: 0 | HP: 210
+ID: 967 | Name: Fidough | CardType: 0 | HP: 60
+ID: 1142 | Name: Fighting Gong | CardType: 1 | HP: 0
+ID: 105 | Name: Finizen | CardType: 0 | HP: 70
+ID: 1232 | Name: Firebreather | CardType: 3 | HP: 0
+ID: 239 | Name: Flareon ex | CardType: 0 | HP: 270
+ID: 1023 | Name: Fletchinder | CardType: 0 | HP: 90
+ID: 1075 | Name: Fletchling | CardType: 0 | HP: 60
+ID: 185 | Name: Flittle | CardType: 0 | HP: 40
+ID: 368 | Name: Floatzel | CardType: 0 | HP: 120
+ID: 923 | Name: Floragato | CardType: 0 | HP: 90
+ID: 56 | Name: Flutter Mane | CardType: 0 | HP: 90
+ID: 824 | Name: Flygon | CardType: 0 | HP: 150
+ID: 189 | Name: Flygon ex | CardType: 0 | HP: 310
+ID: 397 | Name: Fomantis | CardType: 0 | HP: 60
+ID: 488 | Name: Foongus | CardType: 0 | HP: 50
+ID: 1261 | Name: Forest of Vitality | CardType: 4 | HP: 0
+ID: 465 | Name: Forretress | CardType: 0 | HP: 130
+ID: 549 | Name: Fraxure | CardType: 0 | HP: 100
+ID: 994 | Name: Fraxure | CardType: 0 | HP: 100
+ID: 597 | Name: Frillish | CardType: 0 | HP: 80
+ID: 33 | Name: Froakie | CardType: 0 | HP: 60
+ID: 945 | Name: Froakie | CardType: 0 | HP: 60
+ID: 34 | Name: Frogadier | CardType: 0 | HP: 90
+ID: 104 | Name: Froslass | CardType: 0 | HP: 90
+ID: 730 | Name: Frosmoth | CardType: 0 | HP: 110
+ID: 866 | Name: Frosmoth | CardType: 0 | HP: 110
+ID: 935 | Name: Fuecoco | CardType: 0 | HP: 80
+ID: 1244 | Name: Full Metal Lab | CardType: 4 | HP: 0
+ID: 1076 | Name: Furfrou | CardType: 0 | HP: 90
+ID: 893 | Name: Galarian Linoone | CardType: 0 | HP: 90
+ID: 894 | Name: Galarian Obstagoon | CardType: 0 | HP: 170
+ID: 892 | Name: Galarian Zigzagoon | CardType: 0 | HP: 70
+ID: 126 | Name: Galvantula | CardType: 0 | HP: 100
+ID: 587 | Name: Galvantula | CardType: 0 | HP: 90
+ID: 161 | Name: Galvantula ex | CardType: 0 | HP: 260
+ID: 613 | Name: Garbodor | CardType: 0 | HP: 140
+ID: 685 | Name: Garganacl | CardType: 0 | HP: 180
+ID: 59 | Name: Gastly | CardType: 0 | HP: 60
+ID: 770 | Name: Gastly | CardType: 0 | HP: 70
+ID: 1057 | Name: Gastly | CardType: 0 | HP: 70
+ID: 225 | Name: Gastrodon | CardType: 0 | HP: 130
+ID: 142 | Name: Genesect | CardType: 0 | HP: 110
+ID: 785 | Name: Genesect | CardType: 0 | HP: 120
+ID: 547 | Name: Genesect ex | CardType: 0 | HP: 220
+ID: 1059 | Name: Gengar | CardType: 0 | HP: 130
+ID: 191 | Name: Gholdengo | CardType: 0 | HP: 130
+ID: 700 | Name: Gholdengo | CardType: 0 | HP: 130
+ID: 601 | Name: Gigalith | CardType: 0 | HP: 170
+ID: 186 | Name: Gimmighoul | CardType: 0 | HP: 70
+ID: 668 | Name: Gimmighoul | CardType: 0 | HP: 70
+ID: 38 | Name: Girafarig | CardType: 0 | HP: 100
+ID: 32 | Name: Glaceon | CardType: 0 | HP: 120
+ID: 243 | Name: Glaceon ex | CardType: 0 | HP: 270
+ID: 940 | Name: Glalie | CardType: 0 | HP: 120
+ID: 1098 | Name: Glass Trumpet | CardType: 1 | HP: 0
+ID: 867 | Name: Glastrier | CardType: 0 | HP: 130
+ID: 820 | Name: Gligar | CardType: 0 | HP: 70
+ID: 821 | Name: Gliscor | CardType: 0 | HP: 120
+ID: 779 | Name: Gloom | CardType: 0 | HP: 70
+ID: 100 | Name: Goldeen | CardType: 0 | HP: 50
+ID: 859 | Name: Golduck | CardType: 0 | HP: 120
+ID: 523 | Name: Golett | CardType: 0 | HP: 90
+ID: 524 | Name: Golurk | CardType: 0 | HP: 160
+ID: 417 | Name: Gorebyss | CardType: 0 | HP: 90
+ID: 594 | Name: Gothita | CardType: 0 | HP: 70
+ID: 596 | Name: Gothitelle | CardType: 0 | HP: 150
+ID: 595 | Name: Gothorita | CardType: 0 | HP: 90
+ID: 46 | Name: Gouging Fire ex | CardType: 0 | HP: 230
+ID: 693 | Name: Grafaiai | CardType: 0 | HP: 100
+ID: 763 | Name: Granbull | CardType: 0 | HP: 130
+ID: 1249 | Name: Grand Tree | CardType: 4 | HP: 0
+ID: 1258 | Name: Granite Cave | CardType: 4 | HP: 0
+ID: 1166 | Name: Gravity Gemstone | CardType: 2 | HP: 0
+ID: 1252 | Name: Gravity Mountain | CardType: 4 | HP: 0
+ID: 58 | Name: Great Tusk | CardType: 0 | HP: 140
+ID: 752 | Name: Greavard | CardType: 0 | HP: 80
+ID: 40 | Name: Greninja ex | CardType: 0 | HP: 310
+ID: 1230 | Name: Grimsley's Move | CardType: 3 | HP: 0
+ID: 89 | Name: Grookey | CardType: 0 | HP: 70
+ID: 973 | Name: Groudon | CardType: 0 | HP: 140
+ID: 18 | Name: Grow Grass Energy | CardType: 6 | HP: 0
+ID: 405 | Name: Growlithe | CardType: 0 | HP: 80
+ID: 750 | Name: Grumpig | CardType: 0 | HP: 120
+ID: 705 | Name: Gumshoos | CardType: 0 | HP: 100
+ID: 114 | Name: Gurdurr | CardType: 0 | HP: 100
+ID: 529 | Name: Gurdurr | CardType: 0 | HP: 100
+ID: 1170 | Name: Haban Berry | CardType: 2 | HP: 0
+ID: 1087 | Name: Hand Trimmer | CardType: 1 | HP: 0
+ID: 1161 | Name: Handheld Fan | CardType: 2 | HP: 0
+ID: 674 | Name: Hariyama | CardType: 0 | HP: 150
+ID: 1223 | Name: Harlequin | CardType: 3 | HP: 0
+ID: 1193 | Name: Hassel | CardType: 3 | HP: 0
+ID: 60 | Name: Haunter | CardType: 0 | HP: 90
+ID: 771 | Name: Haunter | CardType: 0 | HP: 100
+ID: 1058 | Name: Haunter | CardType: 0 | HP: 100
+ID: 1055 | Name: Hawlucha | CardType: 0 | HP: 70
+ID: 550 | Name: Haxorus | CardType: 0 | HP: 170
+ID: 995 | Name: Haxorus | CardType: 0 | HP: 170
+ID: 358 | Name: Hearthflame Mask Ogerpon | CardType: 0 | HP: 110
+ID: 99 | Name: Hearthflame Mask Ogerpon ex | CardType: 0 | HP: 210
+ID: 413 | Name: Heat Rotom | CardType: 0 | HP: 80
+ID: 572 | Name: Heatmor | CardType: 0 | HP: 120
+ID: 118 | Name: Heatran | CardType: 0 | HP: 140
+ID: 1160 | Name: Heavy Baton | CardType: 2 | HP: 0
+ID: 740 | Name: Heliolisk | CardType: 0 | HP: 120
+ID: 871 | Name: Heliolisk | CardType: 0 | HP: 120
+ID: 739 | Name: Helioptile | CardType: 0 | HP: 70
+ID: 870 | Name: Helioptile | CardType: 0 | HP: 70
+ID: 955 | Name: Helioptile | CardType: 0 | HP: 60
+ID: 629 | Name: Herdier | CardType: 0 | HP: 90
+ID: 1159 | Name: Hero’s Cape | CardType: 2 | HP: 0
+ID: 1225 | Name: Hilda | CardType: 3 | HP: 0
+ID: 22 | Name: Hippopotas | CardType: 0 | HP: 90
+ID: 1048 | Name: Hippopotas | CardType: 0 | HP: 100
+ID: 23 | Name: Hippowdon | CardType: 0 | HP: 160
+ID: 1049 | Name: Hippowdon | CardType: 0 | HP: 150
+ID: 972 | Name: Hitmontop | CardType: 0 | HP: 100
+ID: 318 | Name: Ho-Oh | CardType: 0 | HP: 130
+ID: 1078 | Name: Hole-Digging Shovel | CardType: 1 | HP: 0
+ID: 774 | Name: Honchkrow | CardType: 0 | HP: 130
+ID: 1065 | Name: Honedge | CardType: 0 | HP: 70
+ID: 985 | Name: Hoopa | CardType: 0 | HP: 120
+ID: 64 | Name: Hoothoot | CardType: 0 | HP: 70
+ID: 172 | Name: Hoothoot | CardType: 0 | HP: 70
+ID: 250 | Name: Hoothoot | CardType: 0 | HP: 80
+ID: 878 | Name: Hop's Phantump | CardType: 0 | HP: 70
+ID: 879 | Name: Hop's Trevenant | CardType: 0 | HP: 140
+ID: 1115 | Name: Hop’s Bag | CardType: 1 | HP: 0
+ID: 1171 | Name: Hop’s Choice Band | CardType: 2 | HP: 0
+ID: 298 | Name: Hop’s Corviknight | CardType: 0 | HP: 170
+ID: 308 | Name: Hop’s Corvisquire | CardType: 0 | HP: 90
+ID: 311 | Name: Hop’s Cramorant | CardType: 0 | HP: 110
+ID: 310 | Name: Hop’s Dubwool | CardType: 0 | HP: 120
+ID: 307 | Name: Hop’s Rookidee | CardType: 0 | HP: 60
+ID: 289 | Name: Hop’s Sandaconda | CardType: 0 | HP: 140
+ID: 288 | Name: Hop’s Silicobra | CardType: 0 | HP: 80
+ID: 304 | Name: Hop’s Snorlax | CardType: 0 | HP: 150
+ID: 309 | Name: Hop’s Wooloo | CardType: 0 | HP: 70
+ID: 299 | Name: Hop’s Zacian ex | CardType: 0 | HP: 230
+ID: 753 | Name: Houndstone | CardType: 0 | HP: 140
+ID: 416 | Name: Huntail | CardType: 0 | HP: 110
+ID: 348 | Name: Hydrapple | CardType: 0 | HP: 170
+ID: 150 | Name: Hydrapple ex | CardType: 0 | HP: 330
+ID: 229 | Name: Hydreigon ex | CardType: 0 | HP: 330
+ID: 618 | Name: Hydreigon ex | CardType: 0 | HP: 330
+ID: 1082 | Name: Hyper Aroma | CardType: 1 | HP: 0
+ID: 17 | Name: Ignition Energy | CardType: 6 | HP: 0
+ID: 79 | Name: Incineroar ex | CardType: 0 | HP: 320
+ID: 728 | Name: Inteleon | CardType: 0 | HP: 150
+ID: 269 | Name: Iono’s Bellibolt ex | CardType: 0 | HP: 280
+ID: 266 | Name: Iono’s Electrode | CardType: 0 | HP: 100
+ID: 271 | Name: Iono’s Kilowattrel | CardType: 0 | HP: 120
+ID: 268 | Name: Iono’s Tadbulb | CardType: 0 | HP: 60
+ID: 265 | Name: Iono’s Voltorb | CardType: 0 | HP: 70
+ID: 270 | Name: Iono’s Wattrel | CardType: 0 | HP: 60
+ID: 1208 | Name: Iris’s Fighting Spirit | CardType: 3 | HP: 0
+ID: 971 | Name: Iron Boulder | CardType: 0 | HP: 140
+ID: 192 | Name: Iron Crown | CardType: 0 | HP: 130
+ID: 80 | Name: Iron Crown ex | CardType: 0 | HP: 220
+ID: 1140 | Name: Iron Defender | CardType: 1 | HP: 0
+ID: 27 | Name: Iron Leaves | CardType: 0 | HP: 120
+ID: 75 | Name: Iron Leaves ex | CardType: 0 | HP: 220
+ID: 37 | Name: Iron Thorns ex | CardType: 0 | HP: 230
+ID: 651 | Name: Ivysaur | CardType: 0 | HP: 110
+ID: 1241 | Name: Jacinthe | CardType: 3 | HP: 0
+ID: 1246 | Name: Jamming Tower | CardType: 4 | HP: 0
+ID: 1195 | Name: Janine’s Secret Art | CardType: 3 | HP: 0
+ID: 598 | Name: Jellicent ex | CardType: 0 | HP: 270
+ID: 841 | Name: Jigglypuff | CardType: 0 | HP: 70
+ID: 244 | Name: Jolteon ex | CardType: 0 | HP: 260
+ID: 160 | Name: Joltik | CardType: 0 | HP: 30
+ID: 586 | Name: Joltik | CardType: 0 | HP: 40
+ID: 1213 | Name: Judge | CardType: 3 | HP: 0
+ID: 1147 | Name: Jumbo Ice Cream | CardType: 1 | HP: 0
+ID: 101 | Name: Jynx | CardType: 0 | HP: 90
+ID: 744 | Name: Jynx | CardType: 0 | HP: 110
+ID: 742 | Name: Kadabra | CardType: 0 | HP: 80
+ID: 472 | Name: Kangaskhan | CardType: 0 | HP: 120
+ID: 487 | Name: Karrablast | CardType: 0 | HP: 60
+ID: 583 | Name: Keldeo ex | CardType: 0 | HP: 210
+ID: 1191 | Name: Kieran | CardType: 3 | HP: 0
+ID: 901 | Name: Kingambit | CardType: 0 | HP: 170
+ID: 746 | Name: Kirlia | CardType: 0 | HP: 100
+ID: 166 | Name: Klang | CardType: 0 | HP: 90
+ID: 622 | Name: Klang | CardType: 0 | HP: 90
+ID: 1068 | Name: Klefki | CardType: 0 | HP: 70
+ID: 165 | Name: Klink | CardType: 0 | HP: 60
+ID: 621 | Name: Klink | CardType: 0 | HP: 60
+ID: 167 | Name: Klinklang | CardType: 0 | HP: 140
+ID: 623 | Name: Klinklang | CardType: 0 | HP: 150
+ID: 1200 | Name: Kofu | CardType: 3 | HP: 0
+ID: 62 | Name: Koraidon | CardType: 0 | HP: 140
+ID: 226 | Name: Koraidon | CardType: 0 | HP: 130
+ID: 979 | Name: Koraidon ex | CardType: 0 | HP: 230
+ID: 539 | Name: Krokorok | CardType: 0 | HP: 100
+ID: 831 | Name: Krokorok | CardType: 0 | HP: 100
+ID: 540 | Name: Krookodile | CardType: 0 | HP: 170
+ID: 832 | Name: Krookodile | CardType: 0 | HP: 170
+ID: 721 | Name: Kyogre | CardType: 0 | HP: 150
+ID: 144 | Name: Kyurem | CardType: 0 | HP: 130
+ID: 509 | Name: Kyurem ex | CardType: 0 | HP: 230
+ID: 1199 | Name: Lacey | CardType: 3 | HP: 0
+ID: 494 | Name: Lampent | CardType: 0 | HP: 80
+ID: 1184 | Name: Lana’s Aid | CardType: 3 | HP: 0
+ID: 534 | Name: Landorus | CardType: 0 | HP: 130
+ID: 1050 | Name: Landorus | CardType: 0 | HP: 120
+ID: 154 | Name: Lapras ex | CardType: 0 | HP: 220
+ID: 1008 | Name: Larry's Braviary | CardType: 0 | HP: 130
+ID: 997 | Name: Larry's Dudunsparce ex | CardType: 0 | HP: 270
+ID: 996 | Name: Larry's Dunsparce | CardType: 0 | HP: 70
+ID: 1009 | Name: Larry's Komala | CardType: 0 | HP: 90
+ID: 1007 | Name: Larry's Rufflet | CardType: 0 | HP: 70
+ID: 1005 | Name: Larry's Staraptor | CardType: 0 | HP: 150
+ID: 1004 | Name: Larry's Staravia | CardType: 0 | HP: 90
+ID: 1003 | Name: Larry's Starly | CardType: 0 | HP: 60
+ID: 1206 | Name: Larry’s Skill | CardType: 3 | HP: 0
+ID: 496 | Name: Larvesta | CardType: 0 | HP: 60
+ID: 933 | Name: Larvesta | CardType: 0 | HP: 70
+ID: 284 | Name: Larvitar | CardType: 0 | HP: 70
+ID: 184 | Name: Latias ex | CardType: 0 | HP: 210
+ID: 755 | Name: Latios | CardType: 0 | HP: 130
+ID: 26 | Name: Leafeon | CardType: 0 | HP: 120
+ID: 236 | Name: Leafeon ex | CardType: 0 | HP: 270
+ID: 559 | Name: Leavanny | CardType: 0 | HP: 130
+ID: 12 | Name: Legacy Energy | CardType: 6 | HP: 0
+ID: 1254 | Name: Levincia | CardType: 4 | HP: 0
+ID: 609 | Name: Liepard | CardType: 0 | HP: 110
+ID: 1178 | Name: Light Ball | CardType: 2 | HP: 0
+ID: 146 | Name: Lileep | CardType: 0 | HP: 100
+ID: 1227 | Name: Lillie's Determination | CardType: 3 | HP: 0
+ID: 272 | Name: Lillie’s Clefairy ex | CardType: 0 | HP: 190
+ID: 280 | Name: Lillie’s Comfey | CardType: 0 | HP: 70
+ID: 278 | Name: Lillie’s Cutiefly | CardType: 0 | HP: 30
+ID: 1172 | Name: Lillie’s Pearl | CardType: 2 | HP: 0
+ID: 279 | Name: Lillie’s Ribombee | CardType: 0 | HP: 70
+ID: 322 | Name: Lilligant | CardType: 0 | HP: 110
+ID: 485 | Name: Lilligant | CardType: 0 | HP: 100
+ID: 628 | Name: Lillipup | CardType: 0 | HP: 60
+ID: 847 | Name: Linoone | CardType: 0 | HP: 100
+ID: 1204 | Name: Lisia’s Appeal | CardType: 3 | HP: 0
+ID: 715 | Name: Litleo | CardType: 0 | HP: 70
+ID: 77 | Name: Litten | CardType: 0 | HP: 70
+ID: 97 | Name: Litwick | CardType: 0 | HP: 60
+ID: 493 | Name: Litwick | CardType: 0 | HP: 60
+ID: 1251 | Name: Lively Stadium | CardType: 4 | HP: 0
+ID: 787 | Name: Lokix | CardType: 0 | HP: 120
+ID: 261 | Name: Lombre | CardType: 0 | HP: 90
+ID: 783 | Name: Lombre | CardType: 0 | HP: 90
+ID: 759 | Name: Lopunny | CardType: 0 | HP: 110
+ID: 260 | Name: Lotad | CardType: 0 | HP: 60
+ID: 782 | Name: Lotad | CardType: 0 | HP: 70
+ID: 1083 | Name: Love Ball | CardType: 1 | HP: 0
+ID: 1226 | Name: Lt. Surge's Bargain | CardType: 3 | HP: 0
+ID: 1237 | Name: Lucian | CardType: 3 | HP: 0
+ID: 1156 | Name: Lucky Helmet | CardType: 2 | HP: 0
+ID: 262 | Name: Ludicolo | CardType: 0 | HP: 140
+ID: 784 | Name: Ludicolo | CardType: 0 | HP: 160
+ID: 337 | Name: LugiaEX | CardType: 0 | HP: 220
+ID: 1267 | Name: Lumiose City | CardType: 4 | HP: 0
+ID: 1153 | Name: Lumiose Galette | CardType: 1 | HP: 0
+ID: 675 | Name: Lunatone | CardType: 0 | HP: 110
+ID: 398 | Name: Lurantis | CardType: 0 | HP: 120
+ID: 1036 | Name: Luxio | CardType: 0 | HP: 90
+ID: 1037 | Name: Luxray | CardType: 0 | HP: 150
+ID: 954 | Name: Luxray ex | CardType: 0 | HP: 310
+ID: 287 | Name: Lycanroc | CardType: 0 | HP: 120
+ID: 30 | Name: Magcargo ex | CardType: 0 | HP: 270
+ID: 297 | Name: Magearna | CardType: 0 | HP: 90
+ID: 929 | Name: Magmar | CardType: 0 | HP: 80
+ID: 256 | Name: Magmortar | CardType: 0 | HP: 130
+ID: 732 | Name: Magnemite | CardType: 0 | HP: 70
+ID: 950 | Name: Magnemite | CardType: 0 | HP: 60
+ID: 211 | Name: Magneton | CardType: 0 | HP: 100
+ID: 733 | Name: Magneton | CardType: 0 | HP: 90
+ID: 734 | Name: Magnezone | CardType: 0 | HP: 160
+ID: 673 | Name: Makuhita | CardType: 0 | HP: 80
+ID: 802 | Name: Mamoswine | CardType: 0 | HP: 180
+ID: 283 | Name: Mamoswine ex | CardType: 0 | HP: 340
+ID: 542 | Name: Mandibuzz | CardType: 0 | HP: 110
+ID: 984 | Name: Mandibuzz ex | CardType: 0 | HP: 260
+ID: 375 | Name: Manectric | CardType: 0 | HP: 120
+ID: 437 | Name: Mankey | CardType: 0 | HP: 70
+ID: 720 | Name: Mantine | CardType: 0 | HP: 110
+ID: 255 | Name: Maractus | CardType: 0 | HP: 110
+ID: 486 | Name: Maractus | CardType: 0 | HP: 100
+ID: 53 | Name: Marill | CardType: 0 | HP: 70
+ID: 314 | Name: Marill | CardType: 0 | HP: 70
+ID: 961 | Name: Marill | CardType: 0 | HP: 70
+ID: 648 | Name: Marnie's Grimmsnarl ex | CardType: 0 | HP: 320
+ID: 646 | Name: Marnie's Impidimp | CardType: 0 | HP: 70
+ID: 643 | Name: Marnie's Liepard | CardType: 0 | HP: 100
+ID: 647 | Name: Marnie's Morgrem | CardType: 0 | HP: 100
+ID: 649 | Name: Marnie's Morpeko | CardType: 0 | HP: 70
+ID: 642 | Name: Marnie's Purrloin | CardType: 0 | HP: 60
+ID: 645 | Name: Marnie's Scrafty | CardType: 0 | HP: 120
+ID: 644 | Name: Marnie's Scraggy | CardType: 0 | HP: 70
+ID: 681 | Name: Marshadow | CardType: 0 | HP: 90
+ID: 1125 | Name: Master Ball | CardType: 1 | HP: 0
+ID: 987 | Name: Mawile | CardType: 0 | HP: 90
+ID: 1041 | Name: Mawile | CardType: 0 | HP: 110
+ID: 1110 | Name: Max Rod | CardType: 1 | HP: 0
+ID: 1158 | Name: Maximum Belt | CardType: 2 | HP: 0
+ID: 1103 | Name: Meddling Memo | CardType: 1 | HP: 0
+ID: 446 | Name: Medicham | CardType: 0 | HP: 120
+ID: 884 | Name: Medicham | CardType: 0 | HP: 120
+ID: 445 | Name: Meditite | CardType: 0 | HP: 70
+ID: 883 | Name: Meditite | CardType: 0 | HP: 70
+ID: 723 | Name: Mega Abomasnow ex | CardType: 0 | HP: 350
+ID: 687 | Name: Mega Absol ex | CardType: 0 | HP: 280
+ID: 1006 | Name: Mega Audino ex | CardType: 0 | HP: 270
+ID: 662 | Name: Mega Camerupt ex | CardType: 0 | HP: 340
+ID: 790 | Name: Mega Charizard X ex | CardType: 0 | HP: 360
+ID: 928 | Name: Mega Charizard Y ex | CardType: 0 | HP: 360
+ID: 1040 | Name: Mega Clefable ex | CardType: 0 | HP: 320
+ID: 766 | Name: Mega Diancie ex | CardType: 0 | HP: 270
+ID: 904 | Name: Mega Dragonite ex | CardType: 0 | HP: 370
+ID: 868 | Name: Mega Eelektross ex | CardType: 0 | HP: 350
+ID: 932 | Name: Mega Emboar ex | CardType: 0 | HP: 380
+ID: 939 | Name: Mega Feraligatr ex | CardType: 0 | HP: 370
+ID: 861 | Name: Mega Froslass ex | CardType: 0 | HP: 310
+ID: 747 | Name: Mega Gardevoir ex | CardType: 0 | HP: 360
+ID: 772 | Name: Mega Gengar ex | CardType: 0 | HP: 350
+ID: 886 | Name: Mega Hawlucha ex | CardType: 0 | HP: 250
+ID: 781 | Name: Mega Heracross ex | CardType: 0 | HP: 280
+ID: 756 | Name: Mega Kangaskhan ex | CardType: 0 | HP: 300
+ID: 754 | Name: Mega Latias ex | CardType: 0 | HP: 280
+ID: 849 | Name: Mega Lopunny ex | CardType: 0 | HP: 330
+ID: 678 | Name: Mega Lucario ex | CardType: 0 | HP: 340
+ID: 737 | Name: Mega Manectric ex | CardType: 0 | HP: 330
+ID: 695 | Name: Mega Mawile ex | CardType: 0 | HP: 270
+ID: 919 | Name: Mega Meganium ex | CardType: 0 | HP: 360
+ID: 896 | Name: Mega Scrafty ex | CardType: 0 | HP: 330
+ID: 828 | Name: Mega Sharpedo ex | CardType: 0 | HP: 330
+ID: 1145 | Name: Mega Signal | CardType: 1 | HP: 0
+ID: 1064 | Name: Mega Skarmory ex | CardType: 0 | HP: 260
+ID: 1031 | Name: Mega Starmie ex | CardType: 0 | HP: 330
+ID: 652 | Name: Mega Venusaur ex | CardType: 0 | HP: 380
+ID: 1056 | Name: Mega Zygarde ex | CardType: 0 | HP: 310
+ID: 710 | Name: Meganium | CardType: 0 | HP: 160
+ID: 1104 | Name: Megaton Blower | CardType: 1 | HP: 0
+ID: 991 | Name: Melmetal | CardType: 0 | HP: 160
+ID: 765 | Name: Meloetta | CardType: 0 | HP: 90
+ID: 525 | Name: Meloetta ex | CardType: 0 | HP: 200
+ID: 168 | Name: Meltan | CardType: 0 | HP: 70
+ID: 924 | Name: Meowscarada | CardType: 0 | HP: 160
+ID: 221 | Name: Meowstic | CardType: 0 | HP: 90
+ID: 1043 | Name: Meowstic | CardType: 0 | HP: 100
+ID: 1071 | Name: Meowth ex | CardType: 0 | HP: 170
+ID: 216 | Name: Mesprit | CardType: 0 | HP: 70
+ID: 276 | Name: Metagross | CardType: 0 | HP: 170
+ID: 86 | Name: Metang | CardType: 0 | HP: 100
+ID: 275 | Name: Metang | CardType: 0 | HP: 100
+ID: 253 | Name: Metapod | CardType: 0 | HP: 90
+ID: 605 | Name: Mienfoo | CardType: 0 | HP: 60
+ID: 606 | Name: Mienshao | CardType: 0 | HP: 100
+ID: 768 | Name: Milcery | CardType: 0 | HP: 50
+ID: 102 | Name: Milotic | CardType: 0 | HP: 120
+ID: 207 | Name: Milotic ex | CardType: 0 | HP: 270
+ID: 703 | Name: Miltank | CardType: 0 | HP: 120
+ID: 767 | Name: Mimikyu | CardType: 0 | HP: 70
+ID: 555 | Name: Minccino | CardType: 0 | HP: 60
+ID: 1109 | Name: Miracle Headset | CardType: 1 | HP: 0
+ID: 87 | Name: Miraidon | CardType: 0 | HP: 110
+ID: 313 | Name: Miraidon ex | CardType: 0 | HP: 220
+ID: 957 | Name: Miraidon ex | CardType: 0 | HP: 220
+ID: 812 | Name: Misdreavus | CardType: 0 | HP: 70
+ID: 875 | Name: Misdreavus | CardType: 0 | HP: 60
+ID: 876 | Name: Mismagius | CardType: 0 | HP: 110
+ID: 813 | Name: Mismagius ex | CardType: 0 | HP: 260
+ID: 11 | Name: Mist Energy | CardType: 6 | HP: 0
+ID: 363 | Name: Misty's Gyarados | CardType: 0 | HP: 180
+ID: 364 | Name: Misty's Lapras | CardType: 0 | HP: 110
+ID: 362 | Name: Misty's Magikarp | CardType: 0 | HP: 30
+ID: 359 | Name: Misty's Psyduck | CardType: 0 | HP: 70
+ID: 361 | Name: Misty's Starmie | CardType: 0 | HP: 100
+ID: 360 | Name: Misty's Staryu | CardType: 0 | HP: 70
+ID: 791 | Name: Moltres | CardType: 0 | HP: 120
+ID: 36 | Name: Morpeko | CardType: 0 | HP: 70
+ID: 1187 | Name: Morty’s Conviction | CardType: 3 | HP: 0
+ID: 148 | Name: Mow Rotom | CardType: 0 | HP: 90
+ID: 396 | Name: Mow Rotom | CardType: 0 | HP: 70
+ID: 382 | Name: Mudbray | CardType: 0 | HP: 90
+ID: 383 | Name: Mudsdale | CardType: 0 | HP: 150
+ID: 112 | Name: Munkidori | CardType: 0 | HP: 110
+ID: 139 | Name: Munkidori ex | CardType: 0 | HP: 210
+ID: 516 | Name: Munna | CardType: 0 | HP: 70
+ID: 773 | Name: Murkrow | CardType: 0 | HP: 60
+ID: 517 | Name: Musharna | CardType: 0 | HP: 120
+ID: 1263 | Name: Mystery Garden | CardType: 4 | HP: 0
+ID: 1221 | Name: N's Plan | CardType: 3 | HP: 0
+ID: 863 | Name: N's Vanillish | CardType: 0 | HP: 100
+ID: 862 | Name: N's Vanillite | CardType: 0 | HP: 60
+ID: 864 | Name: N's Vanilluxe | CardType: 0 | HP: 150
+ID: 906 | Name: N's Zekrom | CardType: 0 | HP: 130
+ID: 683 | Name: Nacli | CardType: 0 | HP: 70
+ID: 684 | Name: Naclstack | CardType: 0 | HP: 110
+ID: 1239 | Name: Naveen | CardType: 3 | HP: 0
+ID: 10 | Name: Neo Upper Energy | CardType: 6 | HP: 0
+ID: 1247 | Name: Neutralization Zone | CardType: 4 | HP: 0
+ID: 690 | Name: Nickit | CardType: 0 | HP: 70
+ID: 1097 | Name: Night Stretcher | CardType: 1 | HP: 0
+ID: 1266 | Name: Nighttime Mine | CardType: 4 | HP: 0
+ID: 712 | Name: Nincada | CardType: 0 | HP: 50
+ID: 660 | Name: Ninetales | CardType: 0 | HP: 120
+ID: 713 | Name: Ninjask | CardType: 0 | HP: 80
+ID: 173 | Name: Noctowl | CardType: 0 | HP: 100
+ID: 907 | Name: Noibat | CardType: 0 | HP: 70
+ID: 908 | Name: Noivern | CardType: 0 | HP: 120
+ID: 443 | Name: Nosepass | CardType: 0 | HP: 80
+ID: 1046 | Name: Nosepass | CardType: 0 | HP: 90
+ID: 661 | Name: Numel | CardType: 0 | HP: 80
+ID: 856 | Name: Numel | CardType: 0 | HP: 80
+ID: 69 | Name: Nuzleaf | CardType: 0 | HP: 90
+ID: 657 | Name: Nuzleaf | CardType: 0 | HP: 100
+ID: 323 | Name: Nymble | CardType: 0 | HP: 50
+ID: 786 | Name: Nymble | CardType: 0 | HP: 50
+ID: 1253 | Name: N’s Castle | CardType: 4 | HP: 0
+ID: 258 | Name: N’s Darmanitan | CardType: 0 | HP: 140
+ID: 257 | Name: N’s Darumaka | CardType: 0 | HP: 80
+ID: 267 | Name: N’s Joltik | CardType: 0 | HP: 40
+ID: 295 | Name: N’s Klang | CardType: 0 | HP: 90
+ID: 294 | Name: N’s Klink | CardType: 0 | HP: 60
+ID: 296 | Name: N’s Klinklang | CardType: 0 | HP: 160
+ID: 1113 | Name: N’s PP Up | CardType: 1 | HP: 0
+ID: 291 | Name: N’s Purrloin | CardType: 0 | HP: 70
+ID: 303 | Name: N’s Reshiram | CardType: 0 | HP: 130
+ID: 277 | Name: N’s Sigilyph | CardType: 0 | HP: 110
+ID: 293 | Name: N’s Zoroark ex | CardType: 0 | HP: 280
+ID: 292 | Name: N’s Zorua | CardType: 0 | HP: 70
+ID: 778 | Name: Oddish | CardType: 0 | HP: 50
+ID: 1090 | Name: Ogre’s Mask | CardType: 1 | HP: 0
+ID: 116 | Name: Okidogi | CardType: 0 | HP: 130
+ID: 890 | Name: Okidogi | CardType: 0 | HP: 140
+ID: 138 | Name: Okidogi ex | CardType: 0 | HP: 250
+ID: 671 | Name: Onix | CardType: 0 | HP: 120
+ID: 795 | Name: Oricorio ex | CardType: 0 | HP: 190
+ID: 993 | Name: Orthworm ex | CardType: 0 | HP: 220
+ID: 574 | Name: Oshawott | CardType: 0 | HP: 70
+ID: 738 | Name: Pachirisu | CardType: 0 | HP: 70
+ID: 51 | Name: Palafin | CardType: 0 | HP: 150
+ID: 106 | Name: Palafin | CardType: 0 | HP: 100
+ID: 107 | Name: Palafin ex | CardType: 0 | HP: 340
+ID: 819 | Name: Paldean Tauros | CardType: 0 | HP: 130
+ID: 223 | Name: PalossandEX | CardType: 0 | HP: 280
+ID: 501 | Name: Palpitoad | CardType: 0 | HP: 90
+ID: 885 | Name: Pancham | CardType: 0 | HP: 70
+ID: 897 | Name: Pangoro | CardType: 0 | HP: 140
+ID: 498 | Name: Panpour | CardType: 0 | HP: 70
+ID: 482 | Name: Pansage | CardType: 0 | HP: 70
+ID: 570 | Name: Pansear | CardType: 0 | HP: 70
+ID: 978 | Name: Passimian | CardType: 0 | HP: 110
+ID: 626 | Name: Patrat | CardType: 0 | HP: 60
+ID: 809 | Name: Pawmi | CardType: 0 | HP: 60
+ID: 810 | Name: Pawmo | CardType: 0 | HP: 90
+ID: 811 | Name: Pawmot | CardType: 0 | HP: 140
+ID: 544 | Name: Pawniard | CardType: 0 | HP: 60
+ID: 899 | Name: Pawniard | CardType: 0 | HP: 70
+ID: 1164 | Name: Payapa Berry | CardType: 2 | HP: 0
+ID: 230 | Name: Pecharunt | CardType: 0 | HP: 80
+ID: 898 | Name: Pecharunt | CardType: 0 | HP: 80
+ID: 141 | Name: Pecharunt ex | CardType: 0 | HP: 190
+ID: 1243 | Name: Perilous Jungle | CardType: 4 | HP: 0
+ID: 1183 | Name: Perrin | CardType: 3 | HP: 0
+ID: 321 | Name: Petilil | CardType: 0 | HP: 50
+ID: 484 | Name: Petilil | CardType: 0 | HP: 60
+ID: 551 | Name: Pidove | CardType: 0 | HP: 60
+ID: 568 | Name: Pignite | CardType: 0 | HP: 110
+ID: 931 | Name: Pignite | CardType: 0 | HP: 110
+ID: 948 | Name: Pikachu | CardType: 0 | HP: 70
+ID: 210 | Name: Pikachu ex | CardType: 0 | HP: 200
+ID: 328 | Name: Pikachu ex | CardType: 0 | HP: 190
+ID: 282 | Name: Piloswine | CardType: 0 | HP: 100
+ID: 801 | Name: Piloswine | CardType: 0 | HP: 100
+ID: 67 | Name: Pineco | CardType: 0 | HP: 70
+ID: 393 | Name: Pineco | CardType: 0 | HP: 70
+ID: 25 | Name: Pinsir | CardType: 0 | HP: 110
+ID: 804 | Name: Piplup | CardType: 0 | HP: 70
+ID: 1152 | Name: Poké Pad | CardType: 1 | HP: 0
+ID: 1096 | Name: Poké Vital A | CardType: 1 | HP: 0
+ID: 1122 | Name: Pokégear 3.0 | CardType: 1 | HP: 0
+ID: 1124 | Name: Pokémon Catcher | CardType: 1 | HP: 0
+ID: 28 | Name: Poltchageist | CardType: 0 | HP: 30
+ID: 350 | Name: Ponyta | CardType: 0 | HP: 70
+ID: 1255 | Name: Postwick | CardType: 4 | HP: 0
+ID: 1117 | Name: Potion | CardType: 1 | HP: 0
+ID: 1163 | Name: Powerglass | CardType: 2 | HP: 0
+ID: 1126 | Name: Precious Trolley | CardType: 1 | HP: 0
+ID: 1141 | Name: Premium Power Pro | CardType: 1 | HP: 0
+ID: 1088 | Name: Prime Catcher | CardType: 1 | HP: 0
+ID: 438 | Name: Primeape | CardType: 0 | HP: 110
+ID: 805 | Name: Prinplup | CardType: 0 | HP: 100
+ID: 16 | Name: Prism Energy | CardType: 6 | HP: 0
+ID: 444 | Name: Probopass | CardType: 0 | HP: 140
+ID: 1047 | Name: Probopass | CardType: 0 | HP: 140
+ID: 858 | Name: Psyduck | CardType: 0 | HP: 70
+ID: 1176 | Name: Punk Helmet | CardType: 2 | HP: 0
+ID: 285 | Name: Pupitar | CardType: 0 | HP: 90
+ID: 608 | Name: Purrloin | CardType: 0 | HP: 60
+ID: 716 | Name: Pyroar | CardType: 0 | HP: 130
+ID: 182 | Name: Quaquaval | CardType: 0 | HP: 170
+ID: 947 | Name: Quaxly | CardType: 0 | HP: 60
+ID: 181 | Name: Quaxwell | CardType: 0 | HP: 100
+ID: 152 | Name: Raboot | CardType: 0 | HP: 90
+ID: 665 | Name: Raboot | CardType: 0 | HP: 100
+ID: 74 | Name: Rabsca | CardType: 0 | HP: 70
+ID: 171 | Name: Raging Bolt | CardType: 0 | HP: 130
+ID: 63 | Name: Raging Bolt ex | CardType: 0 | HP: 240
+ID: 949 | Name: Raichu | CardType: 0 | HP: 130
+ID: 735 | Name: Raikou | CardType: 0 | HP: 120
+ID: 745 | Name: Ralts | CardType: 0 | HP: 70
+ID: 351 | Name: Rapidash | CardType: 0 | HP: 110
+ID: 1079 | Name: Rare Candy | CardType: 1 | HP: 0
+ID: 1070 | Name: Raticate | CardType: 0 | HP: 90
+ID: 1069 | Name: Rattata | CardType: 0 | HP: 40
+ID: 905 | Name: Rayquaza | CardType: 0 | HP: 120
+ID: 1089 | Name: Reboot Pod | CardType: 1 | HP: 0
+ID: 1114 | Name: Redeemable Ticket | CardType: 1 | HP: 0
+ID: 944 | Name: Regice ex | CardType: 0 | HP: 230
+ID: 251 | Name: Regigigas | CardType: 0 | HP: 160
+ID: 447 | Name: Regirock ex | CardType: 0 | HP: 230
+ID: 988 | Name: Registeel ex | CardType: 0 | HP: 230
+ID: 57 | Name: Relicanth | CardType: 0 | HP: 100
+ID: 73 | Name: Rellor | CardType: 0 | HP: 50
+ID: 1143 | Name: Repel | CardType: 1 | HP: 0
+ID: 1157 | Name: Rescue Board | CardType: 2 | HP: 0
+ID: 794 | Name: Reshiram | CardType: 0 | HP: 130
+ID: 573 | Name: Reshiram ex | CardType: 0 | HP: 230
+ID: 520 | Name: Reuniclus | CardType: 0 | HP: 140
+ID: 130 | Name: Revavroom ex | CardType: 0 | HP: 280
+ID: 91 | Name: Rillaboom | CardType: 0 | HP: 180
+ID: 333 | Name: Riolu | CardType: 0 | HP: 70
+ID: 677 | Name: Riolu | CardType: 0 | HP: 80
+ID: 974 | Name: Riolu | CardType: 0 | HP: 70
+ID: 1260 | Name: Risky Ruins | CardType: 4 | HP: 0
+ID: 61 | Name: Roaring Moon | CardType: 0 | HP: 140
+ID: 20 | Name: Rock Fighting Energy | CardType: 6 | HP: 0
+ID: 286 | Name: Rockruff | CardType: 0 | HP: 70
+ID: 599 | Name: Roggenrola | CardType: 0 | HP: 80
+ID: 887 | Name: Rolycoly | CardType: 0 | HP: 80
+ID: 1240 | Name: Rosa's Encouragement | CardType: 3 | HP: 0
+ID: 1077 | Name: Roto-Stick | CardType: 1 | HP: 0
+ID: 212 | Name: Rotom | CardType: 0 | HP: 80
+ID: 376 | Name: Rotom | CardType: 0 | HP: 60
+ID: 877 | Name: Rotom | CardType: 0 | HP: 60
+ID: 806 | Name: Rotom ex | CardType: 0 | HP: 190
+ID: 127 | Name: Rowlet | CardType: 0 | HP: 70
+ID: 1020 | Name: Rowlet | CardType: 0 | HP: 80
+ID: 1209 | Name: Ruffian | CardType: 3 | HP: 0
+ID: 632 | Name: Rufflet | CardType: 0 | HP: 70
+ID: 775 | Name: Sableye | CardType: 0 | HP: 80
+ID: 1129 | Name: Sacred Ash | CardType: 1 | HP: 0
+ID: 1177 | Name: Sacred Charm | CardType: 2 | HP: 0
+ID: 302 | Name: Salamence ex | CardType: 0 | HP: 320
+ID: 1025 | Name: Salandit | CardType: 0 | HP: 70
+ID: 1026 | Name: Salazzle ex | CardType: 0 | HP: 260
+ID: 1189 | Name: Salvatore | CardType: 3 | HP: 0
+ID: 576 | Name: Samurott | CardType: 0 | HP: 160
+ID: 538 | Name: Sandile | CardType: 0 | HP: 70
+ID: 830 | Name: Sandile | CardType: 0 | HP: 70
+ID: 669 | Name: Sandshrew | CardType: 0 | HP: 70
+ID: 670 | Name: Sandslash | CardType: 0 | HP: 120
+ID: 312 | Name: Sandy Shocks | CardType: 0 | HP: 120
+ID: 111 | Name: Sandygast | CardType: 0 | HP: 90
+ID: 602 | Name: Sawk | CardType: 0 | HP: 110
+ID: 72 | Name: Sawsbuck | CardType: 0 | HP: 130
+ID: 563 | Name: Sawsbuck | CardType: 0 | HP: 130
+ID: 199 | Name: Scatterbug | CardType: 0 | HP: 40
+ID: 1017 | Name: Scatterbug | CardType: 0 | HP: 40
+ID: 84 | Name: Scizor ex | CardType: 0 | HP: 270
+ID: 537 | Name: Scolipede | CardType: 0 | HP: 160
+ID: 982 | Name: Scolipede | CardType: 0 | HP: 170
+ID: 1093 | Name: Scoop Up Cyclone | CardType: 1 | HP: 0
+ID: 151 | Name: Scorbunny | CardType: 0 | HP: 70
+ID: 664 | Name: Scorbunny | CardType: 0 | HP: 70
+ID: 205 | Name: Scovillain ex | CardType: 0 | HP: 260
+ID: 21 | Name: Scrafty | CardType: 0 | HP: 120
+ID: 611 | Name: Scrafty | CardType: 0 | HP: 120
+ID: 610 | Name: Scraggy | CardType: 0 | HP: 70
+ID: 895 | Name: Scraggy | CardType: 0 | HP: 80
+ID: 1107 | Name: Scramble Switch | CardType: 1 | HP: 0
+ID: 969 | Name: Scream Tail ex | CardType: 0 | HP: 190
+ID: 916 | Name: Scyther | CardType: 0 | HP: 90
+ID: 240 | Name: Seaking | CardType: 0 | HP: 110
+ID: 942 | Name: Sealeo | CardType: 0 | HP: 100
+ID: 1092 | Name: Secret Box | CardType: 1 | HP: 0
+ID: 68 | Name: Seedot | CardType: 0 | HP: 60
+ID: 656 | Name: Seedot | CardType: 0 | HP: 60
+ID: 798 | Name: Seel | CardType: 0 | HP: 80
+ID: 1028 | Name: Seel | CardType: 0 | HP: 80
+ID: 502 | Name: Seismitoad | CardType: 0 | HP: 170
+ID: 1016 | Name: Serperior | CardType: 0 | HP: 160
+ID: 481 | Name: Serperior ex | CardType: 0 | HP: 320
+ID: 480 | Name: Servine | CardType: 0 | HP: 100
+ID: 1015 | Name: Servine | CardType: 0 | HP: 100
+ID: 829 | Name: Seviper | CardType: 0 | HP: 120
+ID: 557 | Name: Sewaddle | CardType: 0 | HP: 50
+ID: 45 | Name: Shaymin | CardType: 0 | HP: 70
+ID: 343 | Name: Shaymin | CardType: 0 | HP: 80
+ID: 1013 | Name: Shaymin | CardType: 0 | HP: 70
+ID: 748 | Name: Shedinja | CardType: 0 | HP: 60
+ID: 301 | Name: Shelgon | CardType: 0 | HP: 100
+ID: 208 | Name: Shellos | CardType: 0 | HP: 70
+ID: 564 | Name: Shelmet | CardType: 0 | HP: 60
+ID: 70 | Name: Shiftry | CardType: 0 | HP: 150
+ID: 658 | Name: Shiftry | CardType: 0 | HP: 160
+ID: 1035 | Name: Shinx | CardType: 0 | HP: 70
+ID: 692 | Name: Shroodle | CardType: 0 | HP: 60
+ID: 394 | Name: Shroomish | CardType: 0 | HP: 60
+ID: 711 | Name: Shuckle | CardType: 0 | HP: 80
+ID: 963 | Name: Shuppet | CardType: 0 | HP: 60
+ID: 591 | Name: Sigilyph | CardType: 0 | HP: 120
+ID: 851 | Name: Silcoon | CardType: 0 | HP: 90
+ID: 499 | Name: Simipour | CardType: 0 | HP: 100
+ID: 483 | Name: Simisage | CardType: 0 | HP: 100
+ID: 571 | Name: Simisear | CardType: 0 | HP: 100
+ID: 94 | Name: Sinistcha | CardType: 0 | HP: 70
+ID: 29 | Name: Sinistcha ex | CardType: 0 | HP: 240
+ID: 717 | Name: Sizzlipede | CardType: 0 | HP: 80
+ID: 466 | Name: Skarmory | CardType: 0 | HP: 110
+ID: 203 | Name: Skeledirge | CardType: 0 | HP: 180
+ID: 1000 | Name: Skitty | CardType: 0 | HP: 60
+ID: 1060 | Name: Skorupi | CardType: 0 | HP: 80
+ID: 232 | Name: Slaking ex | CardType: 0 | HP: 340
+ID: 998 | Name: Slakoth | CardType: 0 | HP: 60
+ID: 163 | Name: Slowking | CardType: 0 | HP: 120
+ID: 162 | Name: Slowpoke | CardType: 0 | HP: 80
+ID: 327 | Name: Slowpoke | CardType: 0 | HP: 70
+ID: 76 | Name: Slugma | CardType: 0 | HP: 80
+ID: 110 | Name: Slurpuff | CardType: 0 | HP: 120
+ID: 966 | Name: Slurpuff | CardType: 0 | HP: 120
+ID: 845 | Name: Smeargle | CardType: 0 | HP: 80
+ID: 402 | Name: Smoliv | CardType: 0 | HP: 60
+ID: 183 | Name: Smoochum | CardType: 0 | HP: 30
+ID: 334 | Name: Sneasel | CardType: 0 | HP: 60
+ID: 825 | Name: Sneasel | CardType: 0 | HP: 70
+ID: 479 | Name: Snivy | CardType: 0 | HP: 70
+ID: 1014 | Name: Snivy | CardType: 0 | HP: 70
+ID: 729 | Name: Snom | CardType: 0 | HP: 50
+ID: 865 | Name: Snom | CardType: 0 | HP: 50
+ID: 1072 | Name: Snorlax | CardType: 0 | HP: 160
+ID: 103 | Name: Snorunt | CardType: 0 | HP: 60
+ID: 860 | Name: Snorunt | CardType: 0 | HP: 70
+ID: 418 | Name: Snover | CardType: 0 | HP: 90
+ID: 722 | Name: Snover | CardType: 0 | HP: 90
+ID: 762 | Name: Snubbull | CardType: 0 | HP: 70
+ID: 726 | Name: Sobble | CardType: 0 | HP: 70
+ID: 518 | Name: Solosis | CardType: 0 | HP: 40
+ID: 676 | Name: Solrock | CardType: 0 | HP: 110
+ID: 1165 | Name: Sparkling Crystal | CardType: 2 | HP: 0
+ID: 701 | Name: Spearow | CardType: 0 | HP: 60
+ID: 880 | Name: Spectrier | CardType: 0 | HP: 120
+ID: 200 | Name: Spewpa | CardType: 0 | HP: 80
+ID: 1018 | Name: Spewpa | CardType: 0 | HP: 80
+ID: 941 | Name: Spheal | CardType: 0 | HP: 70
+ID: 1259 | Name: Spikemuth Gym | CardType: 4 | HP: 0
+ID: 14 | Name: Spiky Energy | CardType: 6 | HP: 0
+ID: 1011 | Name: Spinarak | CardType: 0 | HP: 60
+ID: 688 | Name: Spiritomb | CardType: 0 | HP: 80
+ID: 749 | Name: Spoink | CardType: 0 | HP: 70
+ID: 922 | Name: Sprigatito | CardType: 0 | HP: 60
+ID: 1044 | Name: Spritzee | CardType: 0 | HP: 70
+ID: 478 | Name: Squawkabilly | CardType: 0 | HP: 70
+ID: 1030 | Name: Staryu | CardType: 0 | HP: 70
+ID: 694 | Name: Steelix | CardType: 0 | HP: 200
+ID: 635 | Name: Steven's Baltoy | CardType: 0 | HP: 60
+ID: 639 | Name: Steven's Beldum | CardType: 0 | HP: 70
+ID: 637 | Name: Steven's Carbink | CardType: 0 | HP: 80
+ID: 636 | Name: Steven's Claydol | CardType: 0 | HP: 120
+ID: 641 | Name: Steven's Metagross ex | CardType: 0 | HP: 340
+ID: 640 | Name: Steven's Metang | CardType: 0 | HP: 100
+ID: 638 | Name: Steven's Skarmory | CardType: 0 | HP: 120
+ID: 682 | Name: Stonjourner | CardType: 0 | HP: 130
+ID: 630 | Name: Stoutland | CardType: 0 | HP: 160
+ID: 1144 | Name: Strange Timepiece | CardType: 1 | HP: 0
+ID: 760 | Name: Stufful | CardType: 0 | HP: 70
+ID: 588 | Name: Stunfisk | CardType: 0 | HP: 110
+ID: 869 | Name: Stunfisk | CardType: 0 | HP: 110
+ID: 975 | Name: Stunfisk ex | CardType: 0 | HP: 210
+ID: 803 | Name: Suicune | CardType: 0 | HP: 130
+ID: 1112 | Name: Super Potion | CardType: 1 | HP: 0
+ID: 1203 | Name: Surfer | CardType: 3 | HP: 0
+ID: 1262 | Name: Surfing Beach | CardType: 4 | HP: 0
+ID: 1155 | Name: Survival Brace | CardType: 2 | HP: 0
+ID: 197 | Name: Swablu | CardType: 0 | HP: 50
+ID: 558 | Name: Swadloon | CardType: 0 | HP: 80
+ID: 579 | Name: Swanna | CardType: 0 | HP: 120
+ID: 477 | Name: Swellow | CardType: 0 | HP: 100
+ID: 281 | Name: Swinub | CardType: 0 | HP: 70
+ID: 800 | Name: Swinub | CardType: 0 | HP: 70
+ID: 247 | Name: Swirlix | CardType: 0 | HP: 50
+ID: 965 | Name: Swirlix | CardType: 0 | HP: 60
+ID: 1123 | Name: Switch | CardType: 1 | HP: 0
+ID: 590 | Name: Swoobat | CardType: 0 | HP: 90
+ID: 134 | Name: Sylveon | CardType: 0 | HP: 120
+ID: 330 | Name: Sylveon | CardType: 0 | HP: 120
+ID: 316 | Name: Sylveon ex | CardType: 0 | HP: 270
+ID: 476 | Name: Taillow | CardType: 0 | HP: 60
+ID: 1024 | Name: Talonflame | CardType: 0 | HP: 150
+ID: 706 | Name: Tangela | CardType: 0 | HP: 80
+ID: 707 | Name: Tangrowth | CardType: 0 | HP: 150
+ID: 920 | Name: Tapu Bulu | CardType: 0 | HP: 140
+ID: 213 | Name: Tapu Koko | CardType: 0 | HP: 120
+ID: 872 | Name: Tapu Koko | CardType: 0 | HP: 120
+ID: 329 | Name: Tapu Koko ex | CardType: 0 | HP: 200
+ID: 1238 | Name: Tarragon | CardType: 3 | HP: 0
+ID: 122 | Name: Tatsugiri | CardType: 0 | HP: 70
+ID: 231 | Name: Tatsugiri ex | CardType: 0 | HP: 160
+ID: 390 | Name: Tauros | CardType: 0 | HP: 130
+ID: 95 | Name: Teal Mask Ogerpon | CardType: 0 | HP: 110
+ID: 349 | Name: Teal Mask Ogerpon | CardType: 0 | HP: 110
+ID: 96 | Name: Teal Mask Ogerpon ex | CardType: 0 | HP: 210
+ID: 428 | Name: Team Rocket's Ampharos | CardType: 0 | HP: 140
+ID: 449 | Name: Team Rocket's Arbok | CardType: 0 | HP: 130
+ID: 1217 | Name: Team Rocket's Archer | CardType: 3 | HP: 0
+ID: 1216 | Name: Team Rocket's Ariana | CardType: 3 | HP: 0
+ID: 414 | Name: Team Rocket's Articuno | CardType: 0 | HP: 120
+ID: 399 | Name: Team Rocket's Blipbug | CardType: 0 | HP: 60
+ID: 1131 | Name: Team Rocket's Bother-Bot | CardType: 1 | HP: 0
+ID: 433 | Name: Team Rocket's Chingling | CardType: 0 | HP: 30
+ID: 458 | Name: Team Rocket's Crobat ex | CardType: 0 | HP: 310
+ID: 881 | Name: Team Rocket's Diglett | CardType: 0 | HP: 60
+ID: 435 | Name: Team Rocket's Dottler | CardType: 0 | HP: 80
+ID: 429 | Name: Team Rocket's Drowzee | CardType: 0 | HP: 80
+ID: 882 | Name: Team Rocket's Dugtrio | CardType: 0 | HP: 100
+ID: 448 | Name: Team Rocket's Ekans | CardType: 0 | HP: 70
+ID: 15 | Name: Team Rocket's Energy | CardType: 6 | HP: 0
+ID: 873 | Name: Team Rocket's Exeggcute | CardType: 0 | HP: 60
+ID: 874 | Name: Team Rocket's Exeggutor | CardType: 0 | HP: 140
+ID: 1257 | Name: Team Rocket's Factory | CardType: 4 | HP: 0
+ID: 427 | Name: Team Rocket's Flaaffy | CardType: 0 | HP: 90
+ID: 1218 | Name: Team Rocket's Giovanni | CardType: 3 | HP: 0
+ID: 457 | Name: Team Rocket's Golbat | CardType: 0 | HP: 80
+ID: 1132 | Name: Team Rocket's Great Ball | CardType: 1 | HP: 0
+ID: 459 | Name: Team Rocket's Grimer | CardType: 0 | HP: 80
+ID: 891 | Name: Team Rocket's Honchkrow | CardType: 0 | HP: 130
+ID: 409 | Name: Team Rocket's Houndoom | CardType: 0 | HP: 130
+ID: 408 | Name: Team Rocket's Houndour | CardType: 0 | HP: 70
+ID: 430 | Name: Team Rocket's Hypno | CardType: 0 | HP: 130
+ID: 24 | Name: Team Rocket's Kangaskhan ex | CardType: 0 | HP: 230
+ID: 461 | Name: Team Rocket's Koffing | CardType: 0 | HP: 70
+ID: 440 | Name: Team Rocket's Larvitar | CardType: 0 | HP: 70
+ID: 426 | Name: Team Rocket's Mareep | CardType: 0 | HP: 60
+ID: 470 | Name: Team Rocket's Meowth | CardType: 0 | HP: 70
+ID: 431 | Name: Team Rocket's Mewtwo ex | CardType: 0 | HP: 280
+ID: 434 | Name: Team Rocket's Mimikyu | CardType: 0 | HP: 60
+ID: 407 | Name: Team Rocket's Moltres ex | CardType: 0 | HP: 220
+ID: 460 | Name: Team Rocket's Muk | CardType: 0 | HP: 150
+ID: 463 | Name: Team Rocket's Murkrow | CardType: 0 | HP: 80
+ID: 455 | Name: Team Rocket's Nidoking ex | CardType: 0 | HP: 330
+ID: 452 | Name: Team Rocket's Nidoqueen | CardType: 0 | HP: 170
+ID: 450 | Name: Team Rocket's Nidoran♀ | CardType: 0 | HP: 70
+ID: 453 | Name: Team Rocket's Nidoran♂ | CardType: 0 | HP: 70
+ID: 451 | Name: Team Rocket's Nidorina | CardType: 0 | HP: 90
+ID: 454 | Name: Team Rocket's Nidorino | CardType: 0 | HP: 100
+ID: 436 | Name: Team Rocket's Orbeetle | CardType: 0 | HP: 130
+ID: 471 | Name: Team Rocket's Persian ex | CardType: 0 | HP: 260
+ID: 1219 | Name: Team Rocket's Petrel | CardType: 3 | HP: 0
+ID: 473 | Name: Team Rocket's Porygon | CardType: 0 | HP: 60
+ID: 475 | Name: Team Rocket's Porygon-Z | CardType: 0 | HP: 140
+ID: 474 | Name: Team Rocket's Porygon2 | CardType: 0 | HP: 90
+ID: 1220 | Name: Team Rocket's Proton | CardType: 3 | HP: 0
+ID: 441 | Name: Team Rocket's Pupitar | CardType: 0 | HP: 100
+ID: 469 | Name: Team Rocket's Raticate | CardType: 0 | HP: 90
+ID: 468 | Name: Team Rocket's Rattata | CardType: 0 | HP: 50
+ID: 464 | Name: Team Rocket's Sneasel | CardType: 0 | HP: 80
+ID: 401 | Name: Team Rocket's Spidops | CardType: 0 | HP: 130
+ID: 400 | Name: Team Rocket's Tarountula | CardType: 0 | HP: 50
+ID: 1134 | Name: Team Rocket's Transceiver | CardType: 1 | HP: 0
+ID: 442 | Name: Team Rocket's Tyranitar | CardType: 0 | HP: 180
+ID: 1133 | Name: Team Rocket's Venture Bomb | CardType: 1 | HP: 0
+ID: 1256 | Name: Team Rocket's Watchtower | CardType: 4 | HP: 0
+ID: 462 | Name: Team Rocket's Weezing | CardType: 0 | HP: 130
+ID: 432 | Name: Team Rocket's Wobbuffet | CardType: 0 | HP: 110
+ID: 425 | Name: Team Rocket's Zapdos | CardType: 0 | HP: 120
+ID: 456 | Name: Team Rocket's Zubat | CardType: 0 | HP: 50
+ID: 1154 | Name: Team Rocket’s Hypnotizer | CardType: 2 | HP: 0
+ID: 19 | Name: Telepath Psychic Energy | CardType: 6 | HP: 0
+ID: 567 | Name: Tepig | CardType: 0 | HP: 70
+ID: 930 | Name: Tepig | CardType: 0 | HP: 80
+ID: 1127 | Name: Tera Orb | CardType: 1 | HP: 0
+ID: 234 | Name: Terapagos | CardType: 0 | HP: 120
+ID: 176 | Name: Terapagos ex | CardType: 0 | HP: 230
+ID: 607 | Name: Terrakion | CardType: 0 | HP: 140
+ID: 1179 | Name: Thick Scale | CardType: 2 | HP: 0
+ID: 691 | Name: Thievul | CardType: 0 | HP: 120
+ID: 531 | Name: Throh | CardType: 0 | HP: 130
+ID: 514 | Name: Thundurus | CardType: 0 | HP: 120
+ID: 90 | Name: Thwackey | CardType: 0 | HP: 100
+ID: 113 | Name: Timburr | CardType: 0 | HP: 80
+ID: 528 | Name: Timburr | CardType: 0 | HP: 70
+ID: 41 | Name: Ting-Lu | CardType: 0 | HP: 140
+ID: 697 | Name: Tinkatink | CardType: 0 | HP: 70
+ID: 699 | Name: Tinkaton | CardType: 0 | HP: 160
+ID: 698 | Name: Tinkatuff | CardType: 0 | HP: 90
+ID: 503 | Name: Tirtouga | CardType: 0 | HP: 100
+ID: 838 | Name: Togedemaru | CardType: 0 | HP: 80
+ID: 990 | Name: Togedemaru ex | CardType: 0 | HP: 190
+ID: 214 | Name: Togekiss | CardType: 0 | HP: 140
+ID: 959 | Name: Togepi | CardType: 0 | HP: 50
+ID: 960 | Name: Togetic | CardType: 0 | HP: 90
+ID: 1137 | Name: Tool Scrapper | CardType: 1 | HP: 0
+ID: 324 | Name: Torchic | CardType: 0 | HP: 60
+ID: 410 | Name: Torchic | CardType: 0 | HP: 70
+ID: 634 | Name: Tornadus | CardType: 0 | HP: 120
+ID: 78 | Name: Torracat | CardType: 0 | HP: 100
+ID: 47 | Name: Totodile | CardType: 0 | HP: 70
+ID: 937 | Name: Totodile | CardType: 0 | HP: 80
+ID: 833 | Name: Toxel | CardType: 0 | HP: 70
+ID: 680 | Name: Toxicroak | CardType: 0 | HP: 130
+ID: 834 | Name: Toxtricity | CardType: 0 | HP: 140
+ID: 552 | Name: Tranquill | CardType: 0 | HP: 80
+ID: 187 | Name: Trapinch | CardType: 0 | HP: 60
+ID: 822 | Name: Trapinch | CardType: 0 | HP: 70
+ID: 1111 | Name: Treasure Tracker | CardType: 1 | HP: 0
+ID: 612 | Name: Trubbish | CardType: 0 | HP: 70
+ID: 196 | Name: Turtonator | CardType: 0 | HP: 120
+ID: 1027 | Name: Turtonator | CardType: 0 | HP: 120
+ID: 500 | Name: Tympole | CardType: 0 | HP: 60
+ID: 511 | Name: Tynamo | CardType: 0 | HP: 40
+ID: 290 | Name: Tyranitar | CardType: 0 | HP: 190
+ID: 1054 | Name: Tyrantrum | CardType: 0 | HP: 180
+ID: 672 | Name: Tyrogue | CardType: 0 | HP: 30
+ID: 1053 | Name: Tyrunt | CardType: 0 | HP: 100
+ID: 1121 | Name: Ultra Ball | CardType: 1 | HP: 0
+ID: 248 | Name: Umbreon ex | CardType: 0 | HP: 280
+ID: 1080 | Name: Unfair Stamp | CardType: 1 | HP: 0
+ID: 553 | Name: Unfezant | CardType: 0 | HP: 150
+ID: 1236 | Name: Urbain | CardType: 3 | HP: 0
+ID: 215 | Name: Uxie | CardType: 0 | HP: 70
+ID: 581 | Name: Vanillish | CardType: 0 | HP: 90
+ID: 580 | Name: Vanillite | CardType: 0 | HP: 60
+ID: 582 | Name: Vanilluxe | CardType: 0 | HP: 150
+ID: 241 | Name: Vaporeon ex | CardType: 0 | HP: 280
+ID: 143 | Name: Varoom | CardType: 0 | HP: 70
+ID: 159 | Name: Veluza | CardType: 0 | HP: 130
+ID: 535 | Name: Venipede | CardType: 0 | HP: 80
+ID: 980 | Name: Venipede | CardType: 0 | HP: 80
+ID: 188 | Name: Vibrava | CardType: 0 | HP: 90
+ID: 823 | Name: Vibrava | CardType: 0 | HP: 90
+ID: 202 | Name: Victini | CardType: 0 | HP: 70
+ID: 490 | Name: Victini | CardType: 0 | HP: 80
+ID: 999 | Name: Vigoroth | CardType: 0 | HP: 90
+ID: 780 | Name: Vileplume | CardType: 0 | HP: 150
+ID: 566 | Name: Virizion | CardType: 0 | HP: 120
+ID: 1019 | Name: Vivillon | CardType: 0 | HP: 120
+ID: 88 | Name: Volbeat | CardType: 0 | HP: 70
+ID: 663 | Name: Volcanion | CardType: 0 | HP: 130
+ID: 1034 | Name: Volcanion | CardType: 0 | HP: 130
+ID: 259 | Name: Volcanion ex | CardType: 0 | HP: 220
+ID: 497 | Name: Volcarona | CardType: 0 | HP: 120
+ID: 951 | Name: Voltorb ex | CardType: 0 | HP: 170
+ID: 541 | Name: Vullaby | CardType: 0 | HP: 70
+ID: 983 | Name: Vullaby | CardType: 0 | HP: 70
+ID: 659 | Name: Vulpix | CardType: 0 | HP: 70
+ID: 263 | Name: Wailmer | CardType: 0 | HP: 130
+ID: 264 | Name: Wailord | CardType: 0 | HP: 240
+ID: 1235 | Name: Waitress | CardType: 3 | HP: 0
+ID: 35 | Name: Walking Wake | CardType: 0 | HP: 130
+ID: 1229 | Name: Wally's Compassion | CardType: 3 | HP: 0
+ID: 943 | Name: Walrein | CardType: 0 | HP: 170
+ID: 420 | Name: Wash Rotom | CardType: 0 | HP: 80
+ID: 627 | Name: Watchog | CardType: 0 | HP: 90
+ID: 826 | Name: Weavile | CardType: 0 | HP: 90
+ID: 370 | Name: Wellspring Mask Ogerpon | CardType: 0 | HP: 110
+ID: 108 | Name: Wellspring Mask Ogerpon ex | CardType: 0 | HP: 210
+ID: 238 | Name: Whimsicott | CardType: 0 | HP: 100
+ID: 815 | Name: Whimsicott | CardType: 0 | HP: 90
+ID: 561 | Name: Whimsicott ex | CardType: 0 | HP: 230
+ID: 536 | Name: Whirlipede | CardType: 0 | HP: 100
+ID: 981 | Name: Whirlipede | CardType: 0 | HP: 100
+ID: 842 | Name: Wigglytuff | CardType: 0 | HP: 120
+ID: 50 | Name: Wiglett | CardType: 0 | HP: 60
+ID: 201 | Name: Wo-Chien | CardType: 0 | HP: 130
+ID: 1146 | Name: Wondrous Patch | CardType: 1 | HP: 0
+ID: 589 | Name: Woobat | CardType: 0 | HP: 60
+ID: 52 | Name: Wugtrio ex | CardType: 0 | HP: 250
+ID: 850 | Name: Wurmple | CardType: 0 | HP: 60
+ID: 751 | Name: Xerneas | CardType: 0 | HP: 120
+ID: 331 | Name: XerneasEX | CardType: 0 | HP: 210
+ID: 1197 | Name: Xerosic’s Machinations | CardType: 3 | HP: 0
+ID: 218 | Name: Yamask | CardType: 0 | HP: 70
+ID: 592 | Name: Yamask | CardType: 0 | HP: 70
+ID: 807 | Name: Yamper | CardType: 0 | HP: 70
+ID: 339 | Name: Yanma | CardType: 0 | HP: 70
+ID: 340 | Name: Yanmega ex | CardType: 0 | HP: 280
+ID: 704 | Name: Yungoos | CardType: 0 | HP: 70
+ID: 689 | Name: Yveltal | CardType: 0 | HP: 110
+ID: 1062 | Name: Yveltal ex | CardType: 0 | HP: 210
+ID: 816 | Name: Zacian | CardType: 0 | HP: 130
+ID: 336 | Name: Zacian ex | CardType: 0 | HP: 220
+ID: 467 | Name: Zamazenta | CardType: 0 | HP: 130
+ID: 1002 | Name: Zangoose ex | CardType: 0 | HP: 200
+ID: 952 | Name: Zapdos | CardType: 0 | HP: 110
+ID: 953 | Name: Zapdos | CardType: 0 | HP: 120
+ID: 178 | Name: Zarude | CardType: 0 | HP: 120
+ID: 585 | Name: Zebstrika | CardType: 0 | HP: 120
+ID: 515 | Name: Zekrom ex | CardType: 0 | HP: 230
+ID: 377 | Name: Zeraora | CardType: 0 | HP: 100
+ID: 956 | Name: Zeraora | CardType: 0 | HP: 120
+ID: 846 | Name: Zigzagoon | CardType: 0 | HP: 70
+ID: 137 | Name: Zoroark | CardType: 0 | HP: 120
+ID: 615 | Name: Zoroark | CardType: 0 | HP: 120
+ID: 136 | Name: Zorua | CardType: 0 | HP: 70
+ID: 614 | Name: Zorua | CardType: 0 | HP: 70
+ID: 228 | Name: Zweilous | CardType: 0 | HP: 100
+ID: 617 | Name: Zweilous | CardType: 0 | HP: 110

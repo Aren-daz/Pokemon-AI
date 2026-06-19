@@ -433,5 +433,5 @@ if __name__ == "__main__":
     # Ensure Windows compatibility for multiprocessing
     multiprocessing.freeze_support()
     
-    # Set default: generate 15000 games on 6 parallel workers for validation
-    collect_selfplay_dataset(num_games=15000, num_workers=6)
+    # Set default: generate 5000 games on 6 parallel workers for Lopunny deck
+    collect_selfplay_dataset(num_games=5000, num_workers=6, output_file="selfplay_dataset_lopunny.pt")
