@@ -622,6 +622,73 @@ def print_table_state(obs):
     print(f"    Banc  : {get_bench_desc(p1.bench)}")
     print("="*80 + "\n")
 
+def get_attack_raw_damage(attacker, attack_name, state, player_idx, target_prev):
+    try:
+        from cg.api import all_attack
+        base = 0
+        for a in all_attack():
+            if a.name == attack_name:
+                base = a.damage
+                break
+                
+        if attack_name == "Gale Thrust":
+            if attacker and attacker.appearThisTurn:
+                base += 170
+        elif attack_name == "Fighting Wings":
+            if target_prev:
+                target_is_ex = False
+                try:
+                    card_data = [c for c in all_card_data() if c.cardId == target_prev.id]
+                    if card_data and "ex" in card_data[0].name.lower():
+                        target_is_ex = True
+                except Exception:
+                    pass
+                if target_is_ex:
+                    base += 90
+        elif attack_name == "Tenacious Tail":
+            opp_idx = 1 - player_idx
+            opp = state.players[opp_idx]
+            ex_count = 0
+            
+            def check_ex(pokemon):
+                if pokemon:
+                    try:
+                        card_data = [c for c in all_card_data() if c.cardId == pokemon.id]
+                        if card_data and "ex" in card_data[0].name.lower():
+                            return True
+                    except Exception:
+                        pass
+                return False
+                
+            if check_ex(opp.active[0] if opp.active else None):
+                ex_count += 1
+            for b in opp.bench:
+                if check_ex(b):
+                    ex_count += 1
+            base = ex_count * 60
+        elif attack_name == "Assault Landing":
+            if not state.stadium or state.stadium[0] is None:
+                base = 0
+                
+        # Maximum Belt check
+        if attacker and attacker.tools:
+            has_max_belt = any(t.id == 1158 for t in attacker.tools)
+            if has_max_belt:
+                target_is_ex = False
+                if target_prev:
+                    try:
+                        card_data = [c for c in all_card_data() if c.cardId == target_prev.id]
+                        if card_data and "ex" in card_data[0].name.lower():
+                            target_is_ex = True
+                    except Exception:
+                        pass
+                if target_is_ex:
+                    base += 50
+                    
+        return base
+    except Exception:
+        return 0
+
 def log_transition_result(prev_obs, curr_obs, last_action_info):
     opt = last_action_info["option"]
     opt_type = last_action_info["type"]
@@ -715,12 +782,12 @@ def log_transition_result(prev_obs, curr_obs, last_action_info):
         if target_curr is not None and target_prev is not None and target_curr.id == target_prev.id:
             hp_after = target_curr.hp
             
-        damage = hp_before - hp_after
+        raw_damage = get_attack_raw_damage(attacker, attack_name, prev_state, player_idx, target_prev)
         is_boosted = attacker.appearThisTurn if attacker else False
         boost_str = " (boostee)" if is_boosted else ""
-        ko_str = " (K.O.)" if (hp_before > 0 and hp_after == 0) else ""
+        ko_str = "K.O." if (hp_before > 0 and hp_after == 0) else f"{hp_after} PV"
         
-        print(f"[ATTAQUE] Joueur {player_idx} : {attacker_name} utilise {attack_name}{boost_str} -> {damage} degats -> cible {target_name} {hp_before} -> {hp_after} PV{ko_str}")
+        print(f"[ATTAQUE] Joueur {player_idx} : {attacker_name} utilise {attack_name}{boost_str} inflige {raw_damage} degats bruts -> cible {target_name} avait {hp_before} PV -> {ko_str}")
         
     elif opt_type == OptionType.PLAY:
         hand_before = prev_state.players[player_idx].hand
