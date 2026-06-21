@@ -123,12 +123,14 @@
         }
 
         .file-upload-wrapper input[type=file] {
-            font-size: 100px;
             position: absolute;
             left: 0;
             top: 0;
+            width: 100%;
+            height: 100%;
             opacity: 0;
             cursor: pointer;
+            z-index: 10;
         }
 
         .btn-demo {
@@ -1002,39 +1004,88 @@
         }
 
         function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+            try {
+                const file = e.target.files[0];
+                if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                parseAndLoadLogString(evt.target.result);
-            };
-            reader.readAsText(file);
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    try {
+                        parseAndLoadLogString(evt.target.result);
+                    } catch (readerOnloadErr) {
+                        alert("Erreur lors du traitement du fichier lu : " + readerOnloadErr.message);
+                    }
+                };
+                reader.onerror = function() {
+                    alert("Erreur de lecture du fichier par le navigateur.");
+                };
+                reader.readAsText(file);
+            } catch (err) {
+                alert("Erreur d'initialisation de l'import : " + err.message);
+            }
         }
 
         function parseAndLoadLogString(text) {
-            stopAutoplay();
-            const lines = text.split('\n');
-            const parsed = [];
-            for (let line of lines) {
-                line = line.trim();
-                if (!line || !line.startsWith('{')) continue;
-                try {
-                    parsed.push(JSON.parse(line));
-                } catch (e) {
-                    console.error("Failed to parse log line: ", line, e);
+            try {
+                stopAutoplay();
+                
+                // Strip UTF-8 BOM if present
+                text = text.replace(/^\ufeff/, '');
+                
+                // Split by any newline format (CRLF or LF)
+                const lines = text.split(/\r?\n/);
+                const parsed = [];
+                let parseErrorsCount = 0;
+                let firstError = null;
+
+                for (let i = 0; i < lines.length; i++) {
+                    let line = lines[i].trim();
+                    if (!line) continue;
+                    if (!line.startsWith('{')) continue; // Skip headers, match summaries, etc.
+                    try {
+                        parsed.push(JSON.parse(line));
+                    } catch (e) {
+                        parseErrorsCount++;
+                        if (!firstError) {
+                            firstError = { lineNum: i + 1, error: e.message, snippet: line.substring(0, 100) };
+                        }
+                        console.error("Failed to parse JSON on line " + (i + 1) + ":", line, e);
+                    }
                 }
-            }
 
-            if (parsed.length === 0) {
-                alert("Aucun événement valide trouvé dans ce fichier !");
-                return;
-            }
+                if (parsed.length === 0) {
+                    if (parseErrorsCount > 0) {
+                        alert("Impossible de charger le fichier :\n" + parseErrorsCount + " lignes ressemblent à du JSON mais n'ont pas pu être lues.\n\nPremière erreur à la ligne " + firstError.lineNum + " :\n" + firstError.error + "\n\nExtrait :\n" + firstError.snippet);
+                    } else {
+                        alert("Aucun événement valide trouvé dans ce fichier ! Assurez-vous d'importer un fichier log contenant des lignes JSON valides.");
+                    }
+                    return;
+                }
 
-            gameEvents = parsed;
-            currentStepIdx = 0;
-            buildTimelineSidebar();
-            renderStepState(0);
+                try {
+                    gameEvents = parsed;
+                    currentStepIdx = 0;
+                    buildTimelineSidebar();
+                    renderStepState(0);
+                } catch (renderError) {
+                    alert("Erreur d'affichage du match :\nLe fichier JSON a été lu avec succès, mais le visualiseur a planté lors de l'affichage du début de partie.\n\nErreur : " + renderError.message + "\n\nConsultez la console de développement (F12) pour voir la trace d'appel.");
+                    console.error("Error during rendering step 0:", renderError);
+                    return;
+                }
+                
+                // Show success status indicator in the UI
+                const uploadBtn = document.querySelector('.btn-upload');
+                if (uploadBtn) {
+                    const originalText = uploadBtn.innerHTML;
+                    uploadBtn.innerHTML = '<span style="color: #10b981;">✓ Log Chargé (' + parsed.length + ' étapes)</span>';
+                    setTimeout(() => {
+                        uploadBtn.innerHTML = originalText;
+                    }, 3000);
+                }
+            } catch (globalError) {
+                alert("Erreur globale lors de la lecture du fichier :\n" + globalError.message + "\n\nConsultez la console de développement pour plus de détails.");
+                console.error("Global visualizer loading error:", globalError);
+            }
         }
 
         // Timeline Sidebar populating
