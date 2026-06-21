@@ -1093,22 +1093,22 @@
             stepList.innerHTML = '';
             gameEvents.forEach((ev, idx) => {
                 const item = document.createElement('div');
-                item.className = `step-item player-\${ev.player !== undefined ? ev.player : 0}`;
-                item.id = `step-item-\${idx}`;
+                item.className = `step-item player-${ev.player !== undefined ? ev.player : 0}`;
+                item.id = `step-item-${idx}`;
                 
                 let desc = ev.action_detail || "Début du tour";
                 if (ev.event === "turn_start") {
-                    desc = `--- Début Tour \${ev.turn} (Joueur \${ev.active_player}) ---`;
+                    desc = `--- Début Tour ${ev.turn} (Joueur ${ev.active_player}) ---`;
                 }
 
                 item.innerHTML = `
                     <div class="step-meta">
-                        <span class="step-turn">Turn \${ev.turn}</span>
-                        <span class="step-player \${ev.player === 1 ? 'player-1-badge' : 'player-0-badge'}">
-                            P\${ev.player !== undefined ? ev.player : ev.active_player}
+                        <span class="step-turn">Turn ${ev.turn}</span>
+                        <span class="step-player ${ev.player === 1 ? 'player-1-badge' : 'player-0-badge'}">
+                            P${ev.player !== undefined ? ev.player : ev.active_player}
                         </span>
                     </div>
-                    <div class="step-desc">\${desc}</div>
+                    <div class="step-desc">${desc}</div>
                 `;
 
                 item.addEventListener('click', () => {
@@ -1122,7 +1122,7 @@
         }
 
         function updateStepCounter() {
-            stepCounter.textContent = `\${currentStepIdx + 1} / \${gameEvents.length}`;
+            stepCounter.textContent = `${currentStepIdx + 1} / ${gameEvents.length}`;
         }
 
         function jumpToStep(idx) {
@@ -1135,7 +1135,7 @@
             currentStepIdx = idx;
             
             // Set active class on new step item
-            const newActive = document.getElementById(`step-item-\${idx}`);
+            const newActive = document.getElementById(`step-item-${idx}`);
             if (newActive) {
                 newActive.classList.add('active');
                 newActive.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -1206,7 +1206,7 @@
                 
                 let desc = ev.action_detail;
                 if (ev.event === "turn_start") {
-                    desc = `Début du Tour \${ev.turn} - Tour du Joueur \${ev.active_player}`;
+                    desc = `Début du Tour ${ev.turn} - Tour du Joueur ${ev.active_player}`;
                 }
 
                 // Check for ex glows or custom damage pops
@@ -1216,14 +1216,14 @@
                     const realDmg = ev.result.real_damage_dealt;
                     
                     if (engineDmg !== realDmg) {
-                        extraHtml = `<span class="damage-pop">-\${engineDmg} Brut (Appliqué: -\${realDmg} PV)</span>`;
+                        extraHtml = `<span class="damage-pop">-${engineDmg} Brut (Appliqué: -${realDmg} PV)</span>`;
                     } else {
-                        extraHtml = `<span class="damage-pop">-\${realDmg} PV</span>`;
+                        extraHtml = `<span class="damage-pop">-${realDmg} PV</span>`;
                     }
                 }
 
-                actionBanner.innerHTML = `\${desc}\${extraHtml}`;
-                actionBanner.className = `action-banner p\${ev.player !== undefined ? ev.player : ev.active_player}-action`;
+                actionBanner.innerHTML = `${desc}${extraHtml}`;
+                actionBanner.className = `action-banner p${ev.player !== undefined ? ev.player : ev.active_player}-action`;
             } else {
                 actionBannerWrapper.style.display = 'none';
             }
@@ -1231,8 +1231,8 @@
 
         // Render card grids
         function renderPlayerSide(playerIdx, boardData) {
-            const activeContainer = document.getElementById(`p\${playerIdx}Active`);
-            const benchContainer = document.getElementById(`p\${playerIdx}Bench`);
+            const activeContainer = document.getElementById(`p${playerIdx}Active`);
+            const benchContainer = document.getElementById(`p${playerIdx}Bench`);
 
             // Active Pokemon
             activeContainer.innerHTML = '';
@@ -1251,7 +1251,7 @@
                 } else {
                     const empty = document.createElement('div');
                     empty.className = 'empty-slot';
-                    empty.textContent = `Banc \${i+1}`;
+                    empty.textContent = `Banc ${i+1}`;
                     benchContainer.appendChild(empty);
                 }
             }
@@ -1262,7 +1262,7 @@
             const card = document.createElement('div');
             
             // Build card classes
-            let cardClasses = ['pokemon-card', `p\${playerIdx}-owned`];
+            let cardClasses = ['pokemon-card', `p${playerIdx}-owned`];
             if (isActiveSpot) cardClasses.push('active-spot');
             if (pokemon.name.toLowerCase().includes('ex')) cardClasses.push('ex-card');
             
@@ -1285,7 +1285,7 @@
                 
                 for (const [eng, count] of Object.entries(counts)) {
                     const cls = getEnergyTypeClass(eng);
-                    badgesHtml += `<span class="card-badge badge-energy \${cls}">\${eng.replace('Basic ', '')} x\${count}</span>`;
+                    badgesHtml += `<span class="card-badge badge-energy ${cls}">${eng.replace('Basic ', '')} x${count}</span>`;
                 }
             }
 
@@ -1293,7 +1293,7 @@
             if (pokemon.tools && pokemon.tools.length > 0) {
                 pokemon.tools.forEach(t => {
                     const toolName = t.name || t;
-                    badgesHtml += `<span class="card-badge badge-tool" title="\${toolName}">Outil</span>`;
+                    badgesHtml += `<span class="card-badge badge-tool" title="${toolName}">Outil</span>`;
                 });
             }
 
@@ -1301,11 +1301,11 @@
             card.innerHTML = `
                 <div class="card-hp">
                     <span style="font-weight:700; font-size:0.7rem; color:var(--text-muted);">PV</span>
-                    <span class="\${hpValClass}">\${pokemon.hp} / \${pokemon.maxHp}</span>
+                    <span class="${hpValClass}">${pokemon.hp} / ${pokemon.maxHp}</span>
                 </div>
-                <div class="card-name">\${pokemon.name}</div>
+                <div class="card-name">${pokemon.name}</div>
                 <div class="card-badge-container">
-                    \${badgesHtml}
+                    ${badgesHtml}
                 </div>
             `;
 
@@ -1317,23 +1317,23 @@
             const ev = gameEvents[currentStepIdx];
             if (!ev) return;
 
-            const board = ev.board[\`player_\${playerIdx}\`];
+            const board = ev.board[`player_${playerIdx}`];
             const hands = ev.hands || {};
             
             let titleText = '';
             let items = [];
 
             if (type === 'hand') {
-                titleText = `Main du Joueur \${playerIdx}`;
-                items = hands[\`player_\${playerIdx}\`] || [];
+                titleText = `Main du Joueur ${playerIdx}`;
+                items = hands[`player_${playerIdx}`] || [];
                 
                 if (items.length === 0) {
                     const count = board.hand_count || 0;
-                    titleText += ` (\${count} cartes masquées)`;
+                    titleText += ` (${count} cartes masquées)`;
                     items = Array(count).fill("Carte Masquée (Information Cachée)");
                 }
             } else if (type === 'discard') {
-                titleText = `Défausse du Joueur \${playerIdx}`;
+                titleText = `Défausse du Joueur ${playerIdx}`;
                 items = board.discard || [];
             }
 
@@ -1350,7 +1350,7 @@
                     const isEx = cardName.toLowerCase().includes('ex');
                     if (isEx) item.classList.add('ex-item');
 
-                    item.innerHTML = `<span>\${cardName}</span>`;
+                    item.innerHTML = `<span>${cardName}</span>`;
                     modalBody.appendChild(item);
                 });
             }
