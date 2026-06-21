@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon TCG AI Battle Visualizer</title>
+    <!-- Google Fonts: Outfit for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(22, 30, 49, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --player-0-color: #3b82f6;
+            --player-0-glow: rgba(59, 130, 246, 0.4);
+            --player-1-color: #f59e0b;
+            --player-1-glow: rgba(245, 158, 11, 0.4);
+            
+            --ex-glow: rgba(234, 179, 8, 0.7);
+            
+            --fire-color: #ef4444;
+            --water-color: #0ea5e9;
+            --mist-color: #22d3ee;
+            --colorless-color: #cbd5e1;
+            
+            --font-family: 'Outfit', sans-serif;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 100%);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Style */
+        header {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .title-area h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-area h1 span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.08);
+            color: var(--text-muted);
+            padding: 2px 8px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+            -webkit-text-fill-color: var(--text-muted);
+        }
+
+        .control-inputs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* File Upload Styling */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn-upload {
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-upload:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .file-upload-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .btn-demo {
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.1);
+            color: #fbbf24;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-demo:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: rgba(245, 158, 11, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* Main Visualizer Container */
+        .main-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 280px 1fr 340px;
+            overflow: hidden;
+        }
+
+        /* Sidebar / Timeline */
+        .timeline-sidebar {
+            background: rgba(15, 23, 42, 0.4);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .step-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .step-item.active {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .step-item.active.player-1 {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .step-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .step-turn {
+            color: var(--text-muted);
+        }
+
+        .step-player {
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .player-0-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .player-1-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Center Board Area */
+        .board-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Player Board Sectors */
+        .player-board {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            max-height: 45%;
+        }
+
+        .player-board.top-player {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .player-board.bottom-player {
+            padding-top: 1.5rem;
+        }
+
+        /* Play Slots Area */
+        .slots-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .bench-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        /* Pokemon Card Frame */
+        .pokemon-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            width: 110px;
+            height: 155px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+
+        .pokemon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Card States / Specialties */
+        .pokemon-card.active-spot {
+            width: 130px;
+            height: 180px;
+            border-width: 2.5px;
+            z-index: 2;
+        }
+
+        .pokemon-card.p0-owned.active-spot {
+            border-color: var(--player-0-color);
+            box-shadow: 0 0 15px var(--player-0-glow);
+        }
+
+        .pokemon-card.p1-owned.active-spot {
+            border-color: var(--player-1-color);
+            box-shadow: 0 0 15px var(--player-1-glow);
+        }
+
+        .pokemon-card.ex-card {
+            border: 2px solid #fbbf24 !important;
+            box-shadow: 0 0 15px var(--ex-glow) !important;
+            background: linear-gradient(135deg, rgba(30,41,59,0.9), rgba(217,119,6,0.15));
+        }
+
+        .card-hp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .active-spot .card-hp {
+            font-size: 0.85rem;
+        }
+
+        .hp-value {
+            color: #10b981;
+        }
+
+        .hp-value.injured {
+            color: #ef4444;
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+            line-height: 1.2;
+            word-wrap: break-word;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+        }
+
+        .active-spot .card-name {
+            font-size: 0.95rem;
+        }
+
+        .card-badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .card-badge {
+            font-size: 0.65rem;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .badge-energy {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badge-energy.fire {
+            background: rgba(239, 68, 68, 0.25);
+            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .badge-energy.mist {
+            background: rgba(34, 211, 238, 0.25);
+            color: #99f6e4;
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+
+        .badge-tool {
+            background: rgba(168, 85, 247, 0.2);
+            color: #e9d5ff;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        /* Empty / Placeholder Slots */
+        .empty-slot {
+            width: 110px;
+            height: 155px;
+            border: 1.5px dashed rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .empty-slot.active-spot {
+            width: 130px;
+            height: 180px;
+        }
+
+        /* Action Details Center Banner */
+        .action-banner-wrapper {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            width: 85%;
+            pointer-events: none;
+        }
+
+        .action-banner {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.05rem;
+            pointer-events: auto;
+            border-left: 4px solid #3b82f6;
+            animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .action-banner.p1-action {
+            border-left-color: var(--player-1-color);
+        }
+
+        .damage-pop {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 800;
+            margin-left: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Right Panel: Sideboards & Deck Info */
+        .side-panel {
+            background: rgba(15, 23, 42, 0.4);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-control:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-control.primary {
+            background: var(--player-0-color);
+            border-color: transparent;
+        }
+
+        .btn-control.primary:hover {
+            background: #2563eb;
+        }
+
+        .speed-control {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .speed-control label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .speed-control input[type=range] {
+            width: 100%;
+            accent-color: var(--player-0-color);
+        }
+
+        /* Sideboards sections */
+        .sideboard-section {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sideboard-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .player-info-card.p0-card {
+            border-left: 3px solid var(--player-0-color);
+        }
+
+        .player-info-card.p1-card {
+            border-left: 3px solid var(--player-1-color);
+        }
+
+        .player-name-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .player-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .metric-item {
+            background: rgba(0,0,0,0.2);
+            padding: 6px 4px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.02);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .metric-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .metric-val {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-top: 2px;
+        }
+
+        .p0-card .metric-val {
+            color: #60a5fa;
+        }
+
+        .p1-card .metric-val {
+            color: #fbbf24;
+        }
+
+        /* Hand / Discard Modals or Lists */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 17, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        .modal-header {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 1.2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .card-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card-list-item span:first-child {
+            color: var(--text-main);
+        }
+
+        .card-list-item.ex-item {
+            border-color: rgba(245, 158, 11, 0.4);
+            background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+        }
+
+        .card-list-item.ex-item span:first-child {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+
+        /* Keyboard help banner */
+        .keyboard-help {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 8px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header containing visualizer title and input controls -->
+    <header>
+        <div class="title-area">
+            <h1>Pokémon TCG AI Battle Visualizer <span>v1.0</span></h1>
+        </div>
+        <div class="control-inputs">
+            <button class="btn-demo" id="btnLoadDemo">Load Demo Match</button>
+            <div class="file-upload-wrapper">
+                <button class="btn-upload">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Upload JSON Log
+                </button>
+                <input type="file" id="fileInput" accept=".txt,.json,.jsonl">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Sidebar containing list of turns/actions -->
+        <aside class="timeline-sidebar">
+            <div class="sidebar-header">
+                Timeline
+                <span id="stepCounter">0 / 0</span>
+            </div>
+            <div class="step-list" id="stepList">
+                <!-- Dynamically populated step items -->
+            </div>
+        </aside>
+
+        <!-- Center Visual Board -->
+        <section class="board-container" id="boardContainer">
+            <!-- Player 1 Sector (Opponent - Top Player) -->
+            <div class="player-board top-player" id="player1Sector">
+                <!-- Bench slots Player 1 -->
+                <div class="bench-row" id="p1Bench">
+                    <div class="empty-slot">Banc 1</div>
+                    <div class="empty-slot">Banc 2</div>
+                    <div class="empty-slot">Banc 3</div>
+                    <div class="empty-slot">Banc 4</div>
+                    <div class="empty-slot">Banc 5</div>
+                </div>
+                <!-- Active slot Player 1 -->
+                <div class="slots-row">
+                    <div class="active-spot-wrapper" id="p1Active">
+                        <div class="empty-slot active-spot">Actif</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Details Banner Overlay -->
+            <div class="action-banner-wrapper" id="actionBannerWrapper" style="display:none;">
+                <div class="action-banner" id="actionBanner">
+                    Attente de chargement d'un fichier log...
+                </div>
+            </div>
+
+            <!-- Player 0 Sector (You - Bottom Player) -->
+            <div class="player-board bottom-player" id="player0Sector">
+                <!-- Active slot Player 0 -->
+                <div class="slots-row">
+                    <div class="active-spot-wrapper" id="p0Active">
+                        <div class="empty-slot active-spot">Actif</div>
+                    </div>
+                </div>
+                <!-- Bench slots Player 0 -->
+                <div class="bench-row" id="p0Bench">
+                    <div class="empty-slot">Banc 1</div>
+                    <div class="empty-slot">Banc 2</div>
+                    <div class="empty-slot">Banc 3</div>
+                    <div class="empty-slot">Banc 4</div>
+                    <div class="empty-slot">Banc 5</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side panel containing metrics and controls -->
+        <aside class="side-panel">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <div class="section-title">Navigation</div>
+                <div class="control-row">
+                    <button class="btn-control" id="btnPrev">Précédent</button>
+                    <button class="btn-control primary" id="btnPlay">Lecture</button>
+                    <button class="btn-control" id="btnNext">Suivant</button>
+                </div>
+                <div class="speed-control">
+                    <label for="speedRange">Vitesse d'Autoplay: <span id="speedVal">1.5s</span></label>
+                    <input type="range" id="speedRange" min="500" max="3000" step="100" value="1500">
+                </div>
+            </div>
+
+            <!-- Game Stats / Metrics Sideboards -->
+            <div class="sideboard-section">
+                <div class="section-title">Statut des joueurs</div>
+                
+                <!-- Player 1 (Opponent) Metrics Card -->
+                <div class="player-info-card p1-card">
+                    <div class="player-name-row">
+                        <span>Joueur 1 (Hôte/Réseau)</span>
+                    </div>
+                    <div class="player-metrics">
+                        <div class="metric-item" onclick="openModal('hand', 1)">
+                            <div class="metric-label">Main</div>
+                            <div class="metric-val" id="p1HandCount">0</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Recompenses</div>
+                            <div class="metric-val" id="p1Prizes">6</div>
+                        </div>
+                        <div class="metric-item" onclick="openModal('discard', 1)">
+                            <div class="metric-label">Défausse</div>
+                            <div class="metric-val" id="p1DiscardCount">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player 0 (Self) Metrics Card -->
+                <div class="player-info-card p0-card">
+                    <div class="player-name-row">
+                        <span>Joueur 0 (Heuristique/MCTS)</span>
+                    </div>
+                    <div class="player-metrics">
+                        <div class="metric-item" onclick="openModal('hand', 0)">
+                            <div class="metric-label">Main</div>
+                            <div class="metric-val" id="p0HandCount">0</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Recompenses</div>
+                            <div class="metric-val" id="p0Prizes">6</div>
+                        </div>
+                        <div class="metric-item" onclick="openModal('discard', 0)">
+                            <div class="metric-label">Défausse</div>
+                            <div class="metric-val" id="p0DiscardCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="flex:1;"></div>
+            
+            <div class="keyboard-help">
+                Raccourcis: ← / → Navigation | Espace Play/Pause
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modal for lists (Hand, Discard, Deck) -->
+    <div class="modal" id="cardListModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Liste des cartes</div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamically populated cards list -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripting Area -->
+    <script>
+        // Default Demo Data
+        const demoLog = `{"event": "action", "turn": 0, "player": 0, "action_type": "2", "action_detail": "Choisit Non", "resolved": null, "hands": {"player_0": ["Battle Cage (1264)", "Abra (741)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Hilda (1225)", "Buneary (848)"], "player_1": []}, "board": {"player_0": {"deck_count": 53, "hand_count": 7, "prize_count": 0, "active": null, "bench": [], "discard": []}, "player_1": {"deck_count": 53, "hand_count": 7, "prize_count": 0, "active": null, "bench": [], "discard": []}}, "result": {"added_to_hand": ["Battle Cage (1264)", "Abra (741)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Buneary (848)", "Hilda (1225)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 0, "player": 0, "action_type": "3", "action_detail": "Selectionne la carte Abra (741) (Active Setup)", "resolved": "Abra (741)", "hands": {"player_0": [], "player_1": ["Buneary (848)", "Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Dunsparce (305)"]}, "board": {"player_0": {"deck_count": 47, "hand_count": 6, "prize_count": 6, "active": null, "bench": [], "discard": []}, "player_1": {"deck_count": 53, "hand_count": 7, "prize_count": 0, "active": null, "bench": [], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Battle Cage (1264)", "Abra (741)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Buneary (848)", "Hilda (1225)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 0, "player": 1, "action_type": "3", "action_detail": "Selectionne la carte Dunsparce (305) (Active Setup)", "resolved": "Dunsparce (305)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Hilda (1225)", "Buneary (848)"], "player_1": []}, "board": {"player_0": {"deck_count": 47, "hand_count": 6, "prize_count": 6, "active": null, "bench": [], "discard": []}, "player_1": {"deck_count": 47, "hand_count": 6, "prize_count": 6, "active": null, "bench": [], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Buneary (848)", "Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Dunsparce (305)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 0, "player": 0, "action_type": "0", "action_detail": "Choisit le nombre 1", "resolved": null, "hands": {"player_0": [], "player_1": ["Buneary (848)", "Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 7, "prize_count": 6, "active": null, "bench": [], "discard": []}, "player_1": {"deck_count": 47, "hand_count": 6, "prize_count": 6, "active": null, "bench": [], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Buneary (848)", "Hilda (1225)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 0, "player": 1, "action_type": "3", "action_detail": "Selectionne la carte Buneary (848) (Bench Setup)", "resolved": "Buneary (848)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Hilda (1225)", "Buneary (848)", "Moltres (791)"], "player_1": []}, "board": {"player_0": {"deck_count": 46, "hand_count": 7, "prize_count": 6, "active": null, "bench": [], "discard": []}, "player_1": {"deck_count": 47, "hand_count": 6, "prize_count": 6, "active": null, "bench": [], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Buneary (848)", "Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 0, "player": 0, "action_type": "3", "action_detail": "Selectionne la carte Buneary (848) (Bench Setup)", "resolved": "Buneary (848)", "hands": {"player_0": [], "player_1": ["Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 6, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Buneary (848)", "Buneary (848)", "Hilda (1225)", "Moltres (791)"], "added_to_bench": ["Buneary (848)", "Buneary (848)", "Moltres (791)"], "added_to_discard": []}}\n{"event": "turn_start", "turn": 1, "active_player": 1, "hands": {"player_0": [], "player_1": ["Mist Energy (11)", "Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 6, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": []}}}\n{"event": "action", "turn": 1, "player": 1, "action_type": "8", "action_detail": "Attache Energie Mist Energy (11) sur Buneary (848)", "resolved": "Mist Energy (11)", "hands": {"player_0": [], "player_1": ["Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 5, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Mist Energy (11)"], "added_to_bench": [], "added_to_discard": [], "attached_card": "Mist Energy (11)", "attached_target": "Buneary (848)", "is_tool": false}}\n{"event": "turn_start", "turn": 1, "active_player": 1, "hands": {"player_0": [], "player_1": ["Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Battle Cage (1264)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 5, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": []}}}\n{"event": "action", "turn": 1, "player": 1, "action_type": "7", "action_detail": "Joue la carte Battle Cage (1264)", "resolved": "Battle Cage (1264)", "hands": {"player_0": [], "player_1": ["Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Battle Cage (1264)"], "added_to_bench": [], "added_to_discard": [], "played_card": "Battle Cage (1264)"}}\n{"event": "turn_start", "turn": 1, "active_player": 1, "hands": {"player_0": [], "player_1": ["Poke Pad (1152)", "Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": []}}}\n{"event": "action", "turn": 1, "player": 1, "action_type": "7", "action_detail": "Joue la carte Poke Pad (1152)", "resolved": "Poke Pad (1152)", "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 46, "hand_count": 3, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": []}}, "result": {"added_to_hand": [], "removed_from_hand": ["Poke Pad (1152)"], "added_to_bench": [], "added_to_discard": [], "played_card": "Poke Pad (1152)"}}\n{"event": "action", "turn": 1, "player": 1, "action_type": "3", "action_detail": "Selectionne la carte Dudunsparce (66) (Main)", "resolved": "Dudunsparce (66)", "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)", "Dudunsparce (66)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": ["Dudunsparce (66)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": ["Poke Pad (1152)"]}}\n{"event": "turn_start", "turn": 1, "active_player": 1, "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)", "Dudunsparce (66)"]}, "board": {"player_0": {"deck_count": 46, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 1, "player": 1, "action_type": "14", "action_detail": "Termine son tour", "resolved": null, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Hilda (1225)", "Dunsparce (305)"], "player_1": []}, "board": {"player_0": {"deck_count": 45, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)", "Dudunsparce (66)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "turn_start", "turn": 2, "active_player": 0, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Poke Pad (1152)", "Hilda (1225)", "Dunsparce (305)"], "player_1": []}, "board": {"player_0": {"deck_count": 45, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "7", "action_detail": "Joue la carte Poke Pad (1152)", "resolved": "Poke Pad (1152)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Hilda (1225)", "Dunsparce (305)"], "player_1": []}, "board": {"player_0": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": []}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Poke Pad (1152)"], "added_to_bench": [], "added_to_discard": [], "played_card": "Poke Pad (1152)"}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "3", "action_detail": "Selectionne la carte Buneary (848) (Main)", "resolved": "Buneary (848)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Hilda (1225)", "Dunsparce (305)", "Buneary (848)"], "player_1": []}, "board": {"player_0": {"deck_count": 44, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": ["Buneary (848)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": ["Poke Pad (1152)"]}}\n{"event": "turn_start", "turn": 2, "active_player": 0, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Hilda (1225)", "Dunsparce (305)", "Buneary (848)"], "player_1": []}, "board": {"player_0": {"deck_count": 44, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "7", "action_detail": "Joue la carte Hilda (1225)", "resolved": "Hilda (1225)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Buneary (848)"], "player_1": []}, "board": {"player_0": {"deck_count": 44, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Hilda (1225)"], "added_to_bench": [], "added_to_discard": [], "played_card": "Hilda (1225)"}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "3", "action_detail": "Selectionne la carte Dudunsparce ex (306) (Main)", "resolved": "Dudunsparce ex (306)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Buneary (848)", "Dudunsparce ex (306)"], "player_1": []}, "board": {"player_0": {"deck_count": 43, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": ["Dudunsparce ex (306)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": []}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "3", "action_detail": "Selectionne la carte Basic {R} Energy (2) (Main)", "resolved": "Basic {R} Energy (2)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Buneary (848)", "Dudunsparce ex (306)", "Basic {R} Energy (2)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 6, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": ["Basic {R} Energy (2)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": ["Hilda (1225)"]}}\n{"event": "turn_start", "turn": 2, "active_player": 0, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Buneary (848)", "Dudunsparce ex (306)", "Basic {R} Energy (2)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 6, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "7", "action_detail": "Joue la carte Buneary (848)", "resolved": "Buneary (848)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Dudunsparce ex (306)", "Basic {R} Energy (2)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Buneary (848)"], "added_to_bench": ["Buneary (848)"], "added_to_discard": [], "played_card": "Buneary (848)"}}\n{"event": "turn_start", "turn": 2, "active_player": 0, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Dudunsparce ex (306)", "Basic {R} Energy (2)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 5, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "8", "action_detail": "Attache Energie Basic {R} Energy (2) sur Abra (741)", "resolved": "Basic {R} Energy (2)", "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Dudunsparce ex (306)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Basic {R} Energy (2)"], "added_to_bench": [], "added_to_discard": [], "attached_card": "Basic {R} Energy (2)", "attached_target": "Abra (741)", "is_tool": false}}\n{"event": "turn_start", "turn": 2, "active_player": 0, "hands": {"player_0": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Dudunsparce ex (306)"], "player_1": []}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 45, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 2, "player": 0, "action_type": "14", "action_detail": "Termine son tour", "resolved": null, "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 5, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Battle Cage (1264)", "Dudunsparce (66)", "Dunsparce (305)", "Dudunsparce ex (306)"], "added_to_bench": [], "added_to_discard": []}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Basic {R} Energy (2)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 5, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "8", "action_detail": "Attache Energie Basic {R} Energy (2) sur Buneary (848)", "resolved": "Basic {R} Energy (2)", "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Basic {R} Energy (2)"], "added_to_bench": [], "added_to_discard": [], "attached_card": "Basic {R} Energy (2)", "attached_target": "Buneary (848)", "is_tool": false}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Mega Lopunny ex (849)", "Hilda (1225)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 4, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "9", "action_detail": "Evolue Buneary (848) en Mega Lopunny ex (849)", "resolved": "Buneary (848)", "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 3, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Mega Lopunny ex (849)"], "added_to_bench": ["Mega Lopunny ex (849)"], "added_to_discard": [], "evolution": {"from_card": "Buneary (848)", "to_card": "Mega Lopunny ex (849)", "hp_before": 70, "max_hp_before": 70, "hp_after": 330, "max_hp_after": 330, "damage_conserved": 0}}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Dudunsparce (66)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 3, "prize_count": 6, "active": {"id": 305, "name": "Dunsparce", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, "bench": [{"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "9", "action_detail": "Evolue Dunsparce (305) en Dudunsparce (66)", "resolved": "Dunsparce (305)", "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 2, "prize_count": 6, "active": {"id": 66, "name": "Dudunsparce", "hp": 140, "maxHp": 140, "energies": [], "tools": [], "preEvolution": ["Dunsparce (305)"]}, "bench": [{"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": ["Dudunsparce (66)"], "added_to_bench": [], "added_to_discard": [], "evolution": {"from_card": "Dunsparce (305)", "to_card": "Dudunsparce (66)", "hp_before": 70, "max_hp_before": 70, "hp_after": 140, "max_hp_after": 140, "damage_conserved": 0}}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Wally's Compassion (1229)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 44, "hand_count": 2, "prize_count": 6, "active": {"id": 66, "name": "Dudunsparce", "hp": 140, "maxHp": 140, "energies": [], "tools": [], "preEvolution": ["Dunsparce (305)"]}, "bench": [{"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "10", "action_detail": "Dudunsparce (66) utilise Run Away Draw", "resolved": "Dudunsparce (66)", "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Wally's Compassion (1229)", "Wally's Compassion (1229)", "Lillie's Determination (1227)", "Hilda (1225)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 43, "hand_count": 5, "prize_count": 6, "active": null, "bench": [{"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": ["Hilda (1225)", "Wally's Compassion (1229)", "Lillie's Determination (1227)"], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": [], "ability_name": "Run Away Draw", "ability_user": "Dudunsparce (66)"}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "3", "action_detail": "Selectionne la carte Mega Lopunny ex (849) (Active de Secours)", "resolved": "Mega Lopunny ex (849)", "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Wally's Compassion (1229)", "Wally's Compassion (1229)", "Lillie's Determination (1227)", "Hilda (1225)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 43, "hand_count": 5, "prize_count": 6, "active": {"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}, "bench": [], "discard": ["Poke Pad (1152)"]}}, "result": {"added_to_hand": [], "removed_from_hand": [], "added_to_bench": [], "added_to_discard": []}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Hilda (1225)", "Wally's Compassion (1229)", "Wally's Compassion (1229)", "Lillie's Determination (1227)", "Hilda (1225)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 43, "hand_count": 5, "prize_count": 6, "active": {"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}, "bench": [], "discard": ["Poke Pad (1152)"]}}}\n{"event": "action", "turn": 3, "player": 1, "action_type": "7", "action_detail": "Joue la carte Lillie's Determination (1227)", "resolved": "Lillie's Determination (1227)", "hands": {"player_0": [], "player_1": ["Ultra Ball (1121)", "Hilda (1225)", "Wally's Compassion (1229)", "Wally's Compassion (1229)", "Poke Pad (1152)", "Dudunsparce (66)", "Mega Lopunny ex (849)", "Dudunsparce ex (306)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 39, "hand_count": 8, "prize_count": 6, "active": {"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}, "bench": [], "discard": ["Poke Pad (1152)", "Lillie's Determination (1227)"]}}, "result": {"added_to_hand": ["Ultra Ball (1121)", "Poke Pad (1152)", "Dudunsparce (66)", "Mega Lopunny ex (849)", "Dudunsparce ex (306)"], "removed_from_hand": ["Hilda (1225)", "Lillie's Determination (1227)"], "added_to_bench": [], "added_to_discard": ["Lillie's Determination (1227)"], "played_card": "Lillie's Determination (1227)"}}\n{"event": "turn_start", "turn": 3, "active_player": 1, "hands": {"player_0": [], "player_1": ["Ultra Ball (1121)", "Hilda (1225)", "Wally's Compassion (1229)", "Wally's Compassion (1229)", "Poke Pad (1152)", "Dudunsparce (66)", "Mega Lopunny ex (849)", "Dudunsparce ex (306)"]}, "board": {"player_0": {"deck_count": 42, "hand_count": 4, "prize_count": 6, "active": {"id": 741, "name": "Abra", "hp": 50, "maxHp": 50, "energies": ["Basic {R} Energy (2)"], "tools": [], "preEvolution": []}, "bench": [{"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}, {"id": 791, "name": "Moltres", "hp": 120, "maxHp": 120, "energies": [], "tools": [], "preEvolution": []}, {"id": 848, "name": "Buneary", "hp": 70, "maxHp": 70, "energies": [], "tools": [], "preEvolution": []}], "discard": ["Poke Pad (1152)", "Hilda (1225)"]}, "player_1": {"deck_count": 39, "hand_count": 8, "prize_count": 6, "active": {"id": 849, "name": "Mega Lopunny ex", "hp": 330, "maxHp": 330, "energies": ["Mist Energy (11)", "Basic {R} Energy (2)"], "tools": [], "preEvolution": ["Buneary (848)"]}, "bench": [], "discard": ["Poke Pad (1152)", "Lillie's Determination (1227)"]}}}`;
+
+        // App State
+        let gameEvents = [];
+        let currentStepIdx = 0;
+        let autoplayTimer = null;
+        let isPlaying = false;
+
+        // Color helper mapping card ID to appropriate energy type
+        function getEnergyTypeClass(energyName) {
+            if (!energyName) return 'colorless';
+            const name = energyName.toLowerCase();
+            if (name.includes('fire') || name.includes('{r}')) return 'fire';
+            if (name.includes('water') || name.includes('{w}') || name.includes('mist')) return 'mist';
+            return 'colorless';
+        }
+
+        // Initialize elements
+        const fileInput = document.getElementById('fileInput');
+        const btnLoadDemo = document.getElementById('btnLoadDemo');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const btnPlay = document.getElementById('btnPlay');
+        const speedRange = document.getElementById('speedRange');
+        const speedVal = document.getElementById('speedVal');
+        const stepList = document.getElementById('stepList');
+        const stepCounter = document.getElementById('stepCounter');
+        
+        const actionBanner = document.getElementById('actionBanner');
+        const actionBannerWrapper = document.getElementById('actionBannerWrapper');
+
+        const cardListModal = document.getElementById('cardListModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        // Setup Event Listeners
+        fileInput.addEventListener('change', handleFileSelect);
+        btnLoadDemo.addEventListener('click', loadDemoData);
+        btnPrev.addEventListener('click', () => stepPrev());
+        btnNext.addEventListener('click', () => stepNext());
+        btnPlay.addEventListener('click', togglePlay);
+        
+        speedRange.addEventListener('input', () => {
+            speedVal.textContent = (speedRange.value / 1000).toFixed(1) + 's';
+            if (isPlaying) {
+                stopAutoplay();
+                startAutoplay();
+            }
+        });
+
+        // Key Listeners for Shortcuts
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                stepPrev();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                stepNext();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                togglePlay();
+            }
+        });
+
+        // Initialize on load
+        loadDemoData();
+
+        function loadDemoData() {
+            parseAndLoadLogString(demoLog);
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                parseAndLoadLogString(evt.target.result);
+            };
+            reader.readAsText(file);
+        }
+
+        function parseAndLoadLogString(text) {
+            stopAutoplay();
+            const lines = text.split('\n');
+            const parsed = [];
+            for (let line of lines) {
+                line = line.trim();
+                if (!line || !line.startsWith('{')) continue;
+                try {
+                    parsed.push(JSON.parse(line));
+                } catch (e) {
+                    console.error("Failed to parse log line: ", line, e);
+                }
+            }
+
+            if (parsed.length === 0) {
+                alert("Aucun événement valide trouvé dans ce fichier !");
+                return;
+            }
+
+            gameEvents = parsed;
+            currentStepIdx = 0;
+            buildTimelineSidebar();
+            renderStepState(0);
+        }
+
+        // Timeline Sidebar populating
+        function buildTimelineSidebar() {
+            stepList.innerHTML = '';
+            gameEvents.forEach((ev, idx) => {
+                const item = document.createElement('div');
+                item.className = `step-item player-\${ev.player !== undefined ? ev.player : 0}`;
+                item.id = `step-item-\${idx}`;
+                
+                let desc = ev.action_detail || "Début du tour";
+                if (ev.event === "turn_start") {
+                    desc = `--- Début Tour \${ev.turn} (Joueur \${ev.active_player}) ---`;
+                }
+
+                item.innerHTML = `
+                    <div class="step-meta">
+                        <span class="step-turn">Turn \${ev.turn}</span>
+                        <span class="step-player \${ev.player === 1 ? 'player-1-badge' : 'player-0-badge'}">
+                            P\${ev.player !== undefined ? ev.player : ev.active_player}
+                        </span>
+                    </div>
+                    <div class="step-desc">\${desc}</div>
+                `;
+
+                item.addEventListener('click', () => {
+                    stopAutoplay();
+                    jumpToStep(idx);
+                });
+
+                stepList.appendChild(item);
+            });
+            updateStepCounter();
+        }
+
+        function updateStepCounter() {
+            stepCounter.textContent = `\${currentStepIdx + 1} / \${gameEvents.length}`;
+        }
+
+        function jumpToStep(idx) {
+            if (idx < 0 || idx >= gameEvents.length) return;
+            
+            // Remove active status from current step element
+            const oldActive = document.querySelector('.step-item.active');
+            if (oldActive) oldActive.classList.remove('active');
+
+            currentStepIdx = idx;
+            
+            // Set active class on new step item
+            const newActive = document.getElementById(`step-item-\${idx}`);
+            if (newActive) {
+                newActive.classList.add('active');
+                newActive.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+
+            renderStepState(idx);
+            updateStepCounter();
+        }
+
+        function stepNext() {
+            if (currentStepIdx < gameEvents.length - 1) {
+                jumpToStep(currentStepIdx + 1);
+            } else {
+                stopAutoplay();
+            }
+        }
+
+        function stepPrev() {
+            if (currentStepIdx > 0) {
+                jumpToStep(currentStepIdx - 1);
+            }
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        }
+
+        function startAutoplay() {
+            isPlaying = true;
+            btnPlay.textContent = "Pause";
+            btnPlay.style.background = "#ef4444";
+            autoplayTimer = setInterval(() => {
+                stepNext();
+            }, parseInt(speedRange.value));
+        }
+
+        function stopAutoplay() {
+            isPlaying = false;
+            btnPlay.textContent = "Lecture";
+            btnPlay.style.background = "var(--player-0-color)";
+            clearInterval(autoplayTimer);
+        }
+
+        // Render board state for a step index
+        function renderStepState(idx) {
+            const ev = gameEvents[idx];
+            if (!ev) return;
+
+            // Update board view
+            renderPlayerSide(0, ev.board.player_0);
+            renderPlayerSide(1, ev.board.player_1);
+
+            // Update Hand and Discard Display
+            document.getElementById('p0HandCount').textContent = ev.board.player_0.hand_count || 0;
+            document.getElementById('p1HandCount').textContent = ev.board.player_1.hand_count || 0;
+            document.getElementById('p0DiscardCount').textContent = ev.board.player_0.discard ? ev.board.player_0.discard.length : 0;
+            document.getElementById('p1DiscardCount').textContent = ev.board.player_1.discard ? ev.board.player_1.discard.length : 0;
+            document.getElementById('p0Prizes').textContent = ev.board.player_0.prize_count;
+            document.getElementById('p1Prizes').textContent = ev.board.player_1.prize_count;
+
+            // Render Center Banner details
+            if (ev.action_detail || ev.event === "turn_start") {
+                actionBannerWrapper.style.display = 'block';
+                
+                let desc = ev.action_detail;
+                if (ev.event === "turn_start") {
+                    desc = `Début du Tour \${ev.turn} - Tour du Joueur \${ev.active_player}`;
+                }
+
+                // Check for ex glows or custom damage pops
+                let extraHtml = '';
+                if (ev.result && ev.result.real_damage_dealt !== undefined && ev.result.real_damage_dealt > 0) {
+                    const engineDmg = ev.result.engine_damage || ev.result.real_damage_dealt;
+                    const realDmg = ev.result.real_damage_dealt;
+                    
+                    if (engineDmg !== realDmg) {
+                        extraHtml = `<span class="damage-pop">-\${engineDmg} Brut (Appliqué: -\${realDmg} PV)</span>`;
+                    } else {
+                        extraHtml = `<span class="damage-pop">-\${realDmg} PV</span>`;
+                    }
+                }
+
+                actionBanner.innerHTML = `\${desc}\${extraHtml}`;
+                actionBanner.className = `action-banner p\${ev.player !== undefined ? ev.player : ev.active_player}-action`;
+            } else {
+                actionBannerWrapper.style.display = 'none';
+            }
+        }
+
+        // Render card grids
+        function renderPlayerSide(playerIdx, boardData) {
+            const activeContainer = document.getElementById(`p\${playerIdx}Active`);
+            const benchContainer = document.getElementById(`p\${playerIdx}Bench`);
+
+            // Active Pokemon
+            activeContainer.innerHTML = '';
+            if (boardData.active && boardData.active.id) {
+                activeContainer.appendChild(createCardElement(boardData.active, playerIdx, true));
+            } else {
+                activeContainer.innerHTML = `<div class="empty-slot active-spot">Actif Vide</div>`;
+            }
+
+            // Bench Pokemon
+            benchContainer.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const benchPoke = boardData.bench[i];
+                if (benchPoke && benchPoke.id) {
+                    benchContainer.appendChild(createCardElement(benchPoke, playerIdx, false));
+                } else {
+                    const empty = document.createElement('div');
+                    empty.className = 'empty-slot';
+                    empty.textContent = `Banc \${i+1}`;
+                    benchContainer.appendChild(empty);
+                }
+            }
+        }
+
+        // Card Element Builder
+        function createCardElement(pokemon, playerIdx, isActiveSpot) {
+            const card = document.createElement('div');
+            
+            // Build card classes
+            let cardClasses = ['pokemon-card', `p\${playerIdx}-owned`];
+            if (isActiveSpot) cardClasses.push('active-spot');
+            if (pokemon.name.toLowerCase().includes('ex')) cardClasses.push('ex-card');
+            
+            card.className = cardClasses.join(' ');
+
+            // Compute HP injured state
+            const isInjured = pokemon.hp < pokemon.maxHp;
+            const hpValClass = isInjured ? 'hp-value injured' : 'hp-value';
+
+            // Gather attachments (energies, tools)
+            let badgesHtml = '';
+            
+            // Group energies
+            if (pokemon.energies && pokemon.energies.length > 0) {
+                // Count types
+                const counts = {};
+                pokemon.energies.forEach(e => {
+                    counts[e] = (counts[e] || 0) + 1;
+                });
+                
+                for (const [eng, count] of Object.entries(counts)) {
+                    const cls = getEnergyTypeClass(eng);
+                    badgesHtml += `<span class="card-badge badge-energy \${cls}">\${eng.replace('Basic ', '')} x\${count}</span>`;
+                }
+            }
+
+            // Tools
+            if (pokemon.tools && pokemon.tools.length > 0) {
+                pokemon.tools.forEach(t => {
+                    const toolName = t.name || t;
+                    badgesHtml += `<span class="card-badge badge-tool" title="\${toolName}">Outil</span>`;
+                });
+            }
+
+            // Assemble card layout
+            card.innerHTML = `
+                <div class="card-hp">
+                    <span style="font-weight:700; font-size:0.7rem; color:var(--text-muted);">PV</span>
+                    <span class="\${hpValClass}">\${pokemon.hp} / \${pokemon.maxHp}</span>
+                </div>
+                <div class="card-name">\${pokemon.name}</div>
+                <div class="card-badge-container">
+                    \${badgesHtml}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Modals management (click to view Hands or Discard piles)
+        function openModal(type, playerIdx) {
+            const ev = gameEvents[currentStepIdx];
+            if (!ev) return;
+
+            const board = ev.board[\`player_\${playerIdx}\`];
+            const hands = ev.hands || {};
+            
+            let titleText = '';
+            let items = [];
+
+            if (type === 'hand') {
+                titleText = `Main du Joueur \${playerIdx}`;
+                items = hands[\`player_\${playerIdx}\`] || [];
+                
+                if (items.length === 0) {
+                    const count = board.hand_count || 0;
+                    titleText += ` (\${count} cartes masquées)`;
+                    items = Array(count).fill("Carte Masquée (Information Cachée)");
+                }
+            } else if (type === 'discard') {
+                titleText = `Défausse du Joueur \${playerIdx}`;
+                items = board.discard || [];
+            }
+
+            modalTitle.textContent = titleText;
+            modalBody.innerHTML = '';
+
+            if (items.length === 0) {
+                modalBody.innerHTML = `<div style="text-align:center; color:var(--text-muted); font-style:italic;">Aucune carte dans cette zone.</div>`;
+            } else {
+                items.forEach(cardName => {
+                    const item = document.createElement('div');
+                    item.className = 'card-list-item';
+                    
+                    const isEx = cardName.toLowerCase().includes('ex');
+                    if (isEx) item.classList.add('ex-item');
+
+                    item.innerHTML = `<span>\${cardName}</span>`;
+                    modalBody.appendChild(item);
+                });
+            }
+
+            cardListModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            cardListModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside content
+        window.addEventListener('click', (e) => {
+            if (e.target === cardListModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
